@@ -1,0 +1,166 @@
+﻿@model IEnumerable<ERP.Web.Models.Database.DM_HANG_HOA>
+
+@{
+    ViewBag.Title = "Index";
+}
+<link href="https://cdn.datatables.net/1.10.13/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+<link href="http://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="~/Areas/TruongAnHCM/Content/css/HangHoaTAHCM.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+<link href="~/Content/download/dist/css/AdminLTE.min.css" rel="stylesheet" />
+<link href="~/Content/download/dist/css/skins/_all-skins.min.css" rel="stylesheet" />
+<div ng-app="hanghoaApp" ng-controller="hanghoaCtrl" id="boss">
+    <div class="container">
+        <button type="button" class="btn btn-info btn-lg top" data-toggle="modal" data-target="#myModal">Thêm hàng hóa</button>
+        <div id="quick-access">
+            <form class="form-inline quick-search-form" role="form" action="#">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Nhập từ khóa vào đây">
+                </div>
+                <button type="submit" id="quick-search" class="btn btn-custom"><span class="glyphicon glyphicon-search custom-glyph-color"></span></button>
+            </form>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Thêm hàng hóa</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form name="myForm" novalidate>
+                            Mã hàng hệ thống: <input type="text" ng-model="ma_hang_ht" />
+                            <br />
+                            Mã hàng nhập: <input type="text" ng-model="ma_hang_nhap" />
+                            <br />
+                            Tên hàng: <input type="text" ng-model="ten_hang" />
+                            <br />
+                            Mã nhóm hàng: <input type="text" ng-model="ma_nhom_hang" />
+                            <br />
+                            Seri: <input type="text" ng-model="seri" />
+                            <br />
+                            Đơn vị tính: <input type="text" ng-model="don_vi_tinh" />
+                            <br />
+                            Model đặc biệt: <input type="text" ng-model="model_dac_biet" />
+                            <br />
+                            Hình ảnh: <input type="text" ng-model="hinh_anh" />
+                            <br />
+                            Đặc tính: <input type="text" ng-model="dac_tinh" />
+                            <br />
+                            Ghi chú: <input type="text" ng-model="ghi_chu" />
+                            <br />
+                            TK hạch toán kho: <input type="text" ng-model="tk_hach_toan_kho" />
+                            <br />
+                            TK doanh thu: <input type="text" ng-model="tk_doanh_thu" />
+                            <br />
+                            TK chi phí: <input type="text" ng-model="tk_chi_phi" />
+                            <br />
+                            <button type="button" ng-click="add()" data-dismiss="modal">Thêm mới</button>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="myEdit" role="dialog">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Sửa hàng hóa</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form name="myEditForm" novalidate>
+                            Mã hàng hệ thống: <input type="text" ng-model="item.MA_HANG_HT" ng-disabled="true" />
+                            <br />
+                            Mã hàng nhập: <input type="text" ng-model="item.MA_HANG_NHAP" />
+                            <br />
+                            Tên hàng: <input type="text" ng-model="item.TEN_HANG" />
+                            <br />
+                            Mã nhóm hàng: <input type="text" ng-model="item.MA_NHOM_HANG" />
+                            <br />
+                            Seri: <input type="text" ng-model="item.SERI" />
+                            <br />
+                            Đơn vị tính: <input type="text" ng-model="item.DON_VI_TINH" />
+                            <br />
+                            Model đặc biệt: <input type="text" ng-model="item.MODEL_DAC_BIET" />
+                            <br />
+                            Hình ảnh: <input type="text" ng-model="item.HINH_ANH" />
+                            <br />
+                            Đặc tính: <input type="text" ng-model="item.DAC_TINH" />
+                            <br />
+                            Ghi chú: <input type="text" ng-model="item.GHI_CHU" />
+                            <br />
+                            TK hạch toán kho: <input type="text" ng-model="item.TK_HACH_TOAN_KHO" />
+                            <br />
+                            TK doanh thu: <input type="text" ng-model="item.TK_DOANH_THU" />
+                            <br />
+                            TK chi phí: <input type="text" ng-model="item.TK_CHI_PHI" />
+                            <br />
+                            <button type="button" ng-click="save(item.MA_HANG_HT)" data-dismiss="modal">Lưu</button>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="table-responsive">
+        <table id="example" class="table  table-bordered" cellspacing="0">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Mã hàng hệ thống</th>
+                    <th>Mã hàng nhập</th>
+                    <th>Tên hàng</th>
+                    <th>Mã nhóm hàng</th>
+                    <th>Seri</th>
+                    <th>Đơn vị tính</th>
+                    <th>Model đặc biệt</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr dir-paginate-start="item in hanghoa | itemsPerPage:5 | filter: search_text" class="hover" ng-class-odd="'odd'" ng-class-even="'even'">
+                    <td>
+                        <button ng-if="item.expanded" ng-click="item.expanded = false">-</button>
+                        <button ng-if="!item.expanded" ng-click="item.expanded = true">+</button>
+                    </td>
+                    <td>{{item.MA_HANG_HT}}</td>
+                    <td>{{item.MA_HANG_NHAP}}</td>
+                    <td>{{item.TEN_HANG}}</td>
+                    <td>{{item.MA_NHOM_HANG}}</td>
+                    <td>{{item.SERI}}</td>
+                    <td>{{item.DON_VI_TINH}}</td>
+                    <td>{{item.MODEL_DAC_BIET}}</td>
+                    <td style="width: 130px;">
+                        <button ng-click="edit(item)" type="button" data-toggle="modal" data-target="#myEdit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Sửa</button>
+                        <button ng-click="delete(item.MA_HANG_HT)"><i class="fa fa-trash-o" aria-hidden="true"></i>Xóa</button>
+                    </td>
+                </tr>
+                <tr ng-if="item.expanded" dir-paginate-end="">
+                    <td colspan="8">
+                        {{item.MA_HANG_NHAP}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <dir-pagination-controls max-size="1" style="float:right;"
+                             direction-links="true"
+                             boundary-links="true">
+    </dir-pagination-controls>
+</div>
+<script src="~/Content/download/plugins/angular/angular.js"></script>
+<script src="~/Content/download/plugins/jQuery/jquery-2.2.3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.4.2/angular-ui-router.js"></script>
+<script src="http://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+<script src="~/Areas/TruongAnHCM/Content/js/dirPagination.js"></script>
+<script src="~/Areas/TruongAnHCM/Content/js/KhoTAHCM.js"></script>

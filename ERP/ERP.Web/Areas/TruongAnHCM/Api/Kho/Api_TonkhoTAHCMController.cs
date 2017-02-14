@@ -17,9 +17,16 @@ namespace ERP.Web.Areas.TruongAnHCM.Api.Kho
         private HOPLONG_DATABASEEntities db = new HOPLONG_DATABASEEntities();
 
         // GET: api/Api_TonkhoTAHCM
-        public IQueryable<DM_HANG_TON_KHO> GetDM_HANG_TON_KHO()
+        public List<DM_HANG_TON_KHO> GetDM_HANG_TON_KHO()
         {
-            return db.DM_HANG_TON_KHO;
+            var vData = db.DM_HANG_TON_KHO.Where(x => x.MA_KHO == "TA_HCM");
+            var result = vData.ToList().Select(x => new DM_HANG_TON_KHO()
+            {
+                MA_HANG_HT = x.MA_HANG_HT,
+                MA_KHO = x.MA_KHO,
+                SL_TON = x.SL_TON
+            }).ToList();
+            return result;
         }
 
         // GET: api/Api_TonkhoTAHCM/5
