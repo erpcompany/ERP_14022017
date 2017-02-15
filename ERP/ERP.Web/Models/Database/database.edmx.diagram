@@ -11,7 +11,6 @@
         <EntityTypeShape EntityType="HOPLONG_DATABASEModel.CCTC_PHONG_BAN" Width="1.5" PointX="5.25" PointY="2.375" IsExpanded="true" />
         <EntityTypeShape EntityType="HOPLONG_DATABASEModel.CN_CHI_TIET_NGHIEP_VU" Width="1.5" PointX="5.25" PointY="20.75" IsExpanded="true" />
         <EntityTypeShape EntityType="HOPLONG_DATABASEModel.CN_NGHIEP_VU" Width="1.5" PointX="3" PointY="21.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="HOPLONG_DATABASEModel.DM_HANG_HOA" Width="1.5" PointX="5.25" PointY="14.625" IsExpanded="true" />
         <EntityTypeShape EntityType="HOPLONG_DATABASEModel.DM_HANG_SP" Width="1.5" PointX="3" PointY="13.75" IsExpanded="true" />
         <EntityTypeShape EntityType="HOPLONG_DATABASEModel.DM_HANG_TON_KHO" Width="1.5" PointX="7.5" PointY="5.875" IsExpanded="true" />
         <EntityTypeShape EntityType="HOPLONG_DATABASEModel.DM_KHO" Width="1.5" PointX="5.25" PointY="5.375" IsExpanded="true" />
@@ -25,11 +24,6 @@
         <AssociationConnector Association="HOPLONG_DATABASEModel.FK__CCTC_NHAN__MA_PH__08B54D69" ManuallyRouted="false" />
         <AssociationConnector Association="HOPLONG_DATABASEModel.FK__CCTC_NHAN_VI__ID__07C12930" ManuallyRouted="false" />
         <AssociationConnector Association="HOPLONG_DATABASEModel.FK__CN_CHI_TI__ID_NG__5629CD9C" ManuallyRouted="false" />
-        <AssociationConnector Association="HOPLONG_DATABASEModel.FK__DM_HANG_H__MA_NH__59063A47" ManuallyRouted="false" />
-        <AssociationConnector Association="HOPLONG_DATABASEModel.FK__DM_HANG_T__MA_HA__5DCAEF64" ManuallyRouted="false" />
-        <AssociationConnector Association="HOPLONG_DATABASEModel.FK_DM_HANG_HOA_DM_TAI_KHOAN_HACH_TOAN" ManuallyRouted="false" />
-        <AssociationConnector Association="HOPLONG_DATABASEModel.FK_DM_HANG_HOA_DM_TAI_KHOAN_HACH_TOAN1" ManuallyRouted="false" />
-        <AssociationConnector Association="HOPLONG_DATABASEModel.FK_DM_HANG_HOA_DM_TAI_KHOAN_HACH_TOAN2" ManuallyRouted="false" />
         <AssociationConnector Association="HOPLONG_DATABASEModel.FK__DM_HANG_S__MA_NH__59FA5E80" ManuallyRouted="false" />
         <AssociationConnector Association="HOPLONG_DATABASEModel.FK__DM_HANG_T__MA_KH__5EBF139D" ManuallyRouted="false" />
         <AssociationConnector Association="HOPLONG_DATABASEModel.FK__DM_KHO__MA_KHO_C__619B8048" ManuallyRouted="false" />
@@ -40,6 +34,12 @@
         <EntityTypeShape EntityType="HOPLONG_DATABASEModel.CN_NGHIEP_VU_NHAN_VIEN" Width="1.5" PointX="7.5" PointY="13.125" />
         <AssociationConnector Association="HOPLONG_DATABASEModel.FK__CN_NGHIEP__ID_CH__571DF1D5" />
         <AssociationConnector Association="HOPLONG_DATABASEModel.FK__CN_NGHIEP__ID_NH__5812160E" />
+        <EntityTypeShape EntityType="HOPLONG_DATABASEModel.DM_HANG_HOA" Width="1.5" PointX="5.25" PointY="14.625" />
+        <AssociationConnector Association="HOPLONG_DATABASEModel.FK__DM_HANG_H__MA_NH__59063A47" />
+        <AssociationConnector Association="HOPLONG_DATABASEModel.FK__DM_HANG_T__MA_HA__5DCAEF64" />
+        <AssociationConnector Association="HOPLONG_DATABASEModel.FK_DM_HANG_HOA_DM_TAI_KHOAN_HACH_TOAN" />
+        <AssociationConnector Association="HOPLONG_DATABASEModel.FK_DM_HANG_HOA_DM_TAI_KHOAN_HACH_TOAN1" />
+        <AssociationConnector Association="HOPLONG_DATABASEModel.FK_DM_HANG_HOA_DM_TAI_KHOAN_HACH_TOAN2" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -17,9 +17,17 @@ namespace ERP.Web.Areas.HopLong.Api.Kho
         private HOPLONG_DATABASEEntities db = new HOPLONG_DATABASEEntities();
 
         // GET: api/Api_HangsanphamHL
-        public IQueryable<DM_HANG_SP> GetDM_HANG_SP()
+        public List<DM_HANG_SP> GetDM_HANG_SP()
         {
-            return db.DM_HANG_SP;
+            var vData = db.DM_HANG_SP;
+            var result = vData.ToList().Select(x => new DM_HANG_SP()
+            {
+                MA_NHOM_HANG = x.MA_NHOM_HANG,
+                TEN_NHOM_HANG = x.TEN_NHOM_HANG,
+                MA_NHOM_HANG_CHA = x.MA_NHOM_HANG_CHA,
+                GHI_CHU = x.GHI_CHU
+            }).ToList();
+            return result;
         }
 
         // GET: api/Api_HangsanphamHL/5

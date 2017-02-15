@@ -112,7 +112,7 @@
           <Property Name="SERI" Type="varchar" MaxLength="64" />
           <Property Name="DON_VI_TINH" Type="nvarchar" MaxLength="10" />
           <Property Name="MODEL_DAC_BIET" Type="bit" />
-          <Property Name="HINH_ANH" Type="image" />
+          <Property Name="HINH_ANH" Type="varchar" MaxLength="64" />
           <Property Name="DAC_TINH" Type="nvarchar(max)" />
           <Property Name="GHI_CHU" Type="nvarchar(max)" />
           <Property Name="TK_HACH_TOAN_KHO" Type="int" />
@@ -642,29 +642,6 @@
           <Property Name="TEN_NGHIEP_VU" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="CN_CHI_TIET_NGHIEP_VU" Relationship="Self.FK__CN_CHI_TI__ID_NG__5629CD9C" FromRole="CN_NGHIEP_VU" ToRole="CN_CHI_TIET_NGHIEP_VU" />
         </EntityType>
-        <EntityType Name="DM_HANG_HOA">
-          <Key>
-            <PropertyRef Name="MA_HANG_HT" />
-          </Key>
-          <Property Name="MA_HANG_HT" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="MA_HANG_NHAP" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="TEN_HANG" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="MA_NHOM_HANG" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="SERI" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
-          <Property Name="DON_VI_TINH" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="MODEL_DAC_BIET" Type="Boolean" />
-          <Property Name="HINH_ANH" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="DAC_TINH" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="GHI_CHU" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="TK_HACH_TOAN_KHO" Type="Int32" />
-          <Property Name="TK_DOANH_THU" Type="Int32" />
-          <Property Name="TK_CHI_PHI" Type="Int32" />
-          <NavigationProperty Name="DM_HANG_SP" Relationship="Self.FK__DM_HANG_H__MA_NH__59063A47" FromRole="DM_HANG_HOA" ToRole="DM_HANG_SP" />
-          <NavigationProperty Name="DM_HANG_TON_KHO" Relationship="Self.FK__DM_HANG_T__MA_HA__5DCAEF64" FromRole="DM_HANG_HOA" ToRole="DM_HANG_TON_KHO" />
-          <NavigationProperty Name="DM_TAI_KHOAN_HACH_TOAN" Relationship="Self.FK_DM_HANG_HOA_DM_TAI_KHOAN_HACH_TOAN" FromRole="DM_HANG_HOA" ToRole="DM_TAI_KHOAN_HACH_TOAN" />
-          <NavigationProperty Name="DM_TAI_KHOAN_HACH_TOAN1" Relationship="Self.FK_DM_HANG_HOA_DM_TAI_KHOAN_HACH_TOAN1" FromRole="DM_HANG_HOA" ToRole="DM_TAI_KHOAN_HACH_TOAN" />
-          <NavigationProperty Name="DM_TAI_KHOAN_HACH_TOAN2" Relationship="Self.FK_DM_HANG_HOA_DM_TAI_KHOAN_HACH_TOAN2" FromRole="DM_HANG_HOA" ToRole="DM_TAI_KHOAN_HACH_TOAN" />
-        </EntityType>
         <EntityType Name="DM_HANG_SP">
           <Key>
             <PropertyRef Name="MA_NHOM_HANG" />
@@ -673,9 +650,9 @@
           <Property Name="TEN_NHOM_HANG" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="MA_NHOM_HANG_CHA" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Name="GHI_CHU" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="DM_HANG_HOA" Relationship="Self.FK__DM_HANG_H__MA_NH__59063A47" FromRole="DM_HANG_SP" ToRole="DM_HANG_HOA" />
           <NavigationProperty Name="DM_HANG_SP1" Relationship="Self.FK__DM_HANG_S__MA_NH__59FA5E80" FromRole="DM_HANG_SP" ToRole="DM_HANG_SP1" />
           <NavigationProperty Name="DM_HANG_SP2" Relationship="Self.FK__DM_HANG_S__MA_NH__59FA5E80" FromRole="DM_HANG_SP1" ToRole="DM_HANG_SP" />
+          <NavigationProperty Name="DM_HANG_HOA" Relationship="HOPLONG_DATABASEModel.FK__DM_HANG_H__MA_NH__59063A47" FromRole="DM_HANG_SP" ToRole="DM_HANG_HOA" />
         </EntityType>
         <EntityType Name="DM_HANG_TON_KHO">
           <Key>
@@ -685,8 +662,8 @@
           <Property Name="MA_HANG_HT" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="MA_KHO" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="SL_TON" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="DM_HANG_HOA" Relationship="Self.FK__DM_HANG_T__MA_HA__5DCAEF64" FromRole="DM_HANG_TON_KHO" ToRole="DM_HANG_HOA" />
           <NavigationProperty Name="DM_KHO" Relationship="Self.FK__DM_HANG_T__MA_KH__5EBF139D" FromRole="DM_HANG_TON_KHO" ToRole="DM_KHO" />
+          <NavigationProperty Name="DM_HANG_HOA" Relationship="HOPLONG_DATABASEModel.FK__DM_HANG_T__MA_HA__5DCAEF64" FromRole="DM_HANG_TON_KHO" ToRole="DM_HANG_HOA" />
         </EntityType>
         <EntityType Name="DM_KHO">
           <Key>
@@ -713,11 +690,11 @@
           <Property Name="TEN_TA" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
           <Property Name="TK_CAP_CHA" Type="Int32" />
           <Property Name="DIEN_GIAI" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="DM_HANG_HOA" Relationship="Self.FK_DM_HANG_HOA_DM_TAI_KHOAN_HACH_TOAN" FromRole="DM_TAI_KHOAN_HACH_TOAN" ToRole="DM_HANG_HOA" />
-          <NavigationProperty Name="DM_HANG_HOA1" Relationship="Self.FK_DM_HANG_HOA_DM_TAI_KHOAN_HACH_TOAN1" FromRole="DM_TAI_KHOAN_HACH_TOAN" ToRole="DM_HANG_HOA" />
-          <NavigationProperty Name="DM_HANG_HOA2" Relationship="Self.FK_DM_HANG_HOA_DM_TAI_KHOAN_HACH_TOAN2" FromRole="DM_TAI_KHOAN_HACH_TOAN" ToRole="DM_HANG_HOA" />
           <NavigationProperty Name="DM_TAI_KHOAN_HACH_TOAN1" Relationship="Self.FK__DM_TAI_KH__TK_CA__3D5E1FD2" FromRole="DM_TAI_KHOAN_HACH_TOAN" ToRole="DM_TAI_KHOAN_HACH_TOAN1" />
           <NavigationProperty Name="DM_TAI_KHOAN_HACH_TOAN2" Relationship="Self.FK__DM_TAI_KH__TK_CA__3D5E1FD2" FromRole="DM_TAI_KHOAN_HACH_TOAN1" ToRole="DM_TAI_KHOAN_HACH_TOAN" />
+          <NavigationProperty Name="DM_HANG_HOA" Relationship="HOPLONG_DATABASEModel.FK_DM_HANG_HOA_DM_TAI_KHOAN_HACH_TOAN" FromRole="DM_TAI_KHOAN_HACH_TOAN" ToRole="DM_HANG_HOA" />
+          <NavigationProperty Name="DM_HANG_HOA1" Relationship="HOPLONG_DATABASEModel.FK_DM_HANG_HOA_DM_TAI_KHOAN_HACH_TOAN1" FromRole="DM_TAI_KHOAN_HACH_TOAN" ToRole="DM_HANG_HOA" />
+          <NavigationProperty Name="DM_HANG_HOA2" Relationship="HOPLONG_DATABASEModel.FK_DM_HANG_HOA_DM_TAI_KHOAN_HACH_TOAN2" FromRole="DM_TAI_KHOAN_HACH_TOAN" ToRole="DM_HANG_HOA" />
         </EntityType>
         <EntityType Name="HT_NGUOI_DUNG">
           <Key>
@@ -834,66 +811,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__DM_HANG_H__MA_NH__59063A47">
-          <End Role="DM_HANG_SP" Type="Self.DM_HANG_SP" Multiplicity="1" />
-          <End Role="DM_HANG_HOA" Type="Self.DM_HANG_HOA" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DM_HANG_SP">
-              <PropertyRef Name="MA_NHOM_HANG" />
-            </Principal>
-            <Dependent Role="DM_HANG_HOA">
-              <PropertyRef Name="MA_NHOM_HANG" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__DM_HANG_T__MA_HA__5DCAEF64">
-          <End Role="DM_HANG_HOA" Type="Self.DM_HANG_HOA" Multiplicity="1" />
-          <End Role="DM_HANG_TON_KHO" Type="Self.DM_HANG_TON_KHO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DM_HANG_HOA">
-              <PropertyRef Name="MA_HANG_HT" />
-            </Principal>
-            <Dependent Role="DM_HANG_TON_KHO">
-              <PropertyRef Name="MA_HANG_HT" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DM_HANG_HOA_DM_TAI_KHOAN_HACH_TOAN">
-          <End Role="DM_TAI_KHOAN_HACH_TOAN" Type="Self.DM_TAI_KHOAN_HACH_TOAN" Multiplicity="0..1" />
-          <End Role="DM_HANG_HOA" Type="Self.DM_HANG_HOA" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DM_TAI_KHOAN_HACH_TOAN">
-              <PropertyRef Name="SO_TK" />
-            </Principal>
-            <Dependent Role="DM_HANG_HOA">
-              <PropertyRef Name="TK_HACH_TOAN_KHO" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DM_HANG_HOA_DM_TAI_KHOAN_HACH_TOAN1">
-          <End Role="DM_TAI_KHOAN_HACH_TOAN" Type="Self.DM_TAI_KHOAN_HACH_TOAN" Multiplicity="0..1" />
-          <End Role="DM_HANG_HOA" Type="Self.DM_HANG_HOA" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DM_TAI_KHOAN_HACH_TOAN">
-              <PropertyRef Name="SO_TK" />
-            </Principal>
-            <Dependent Role="DM_HANG_HOA">
-              <PropertyRef Name="TK_DOANH_THU" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DM_HANG_HOA_DM_TAI_KHOAN_HACH_TOAN2">
-          <End Role="DM_TAI_KHOAN_HACH_TOAN" Type="Self.DM_TAI_KHOAN_HACH_TOAN" Multiplicity="0..1" />
-          <End Role="DM_HANG_HOA" Type="Self.DM_HANG_HOA" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DM_TAI_KHOAN_HACH_TOAN">
-              <PropertyRef Name="SO_TK" />
-            </Principal>
-            <Dependent Role="DM_HANG_HOA">
-              <PropertyRef Name="TK_CHI_PHI" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__DM_HANG_S__MA_NH__59FA5E80">
           <End Role="DM_HANG_SP" Type="Self.DM_HANG_SP" Multiplicity="0..1" />
           <End Role="DM_HANG_SP1" Type="Self.DM_HANG_SP" Multiplicity="*" />
@@ -949,7 +866,6 @@
           <EntitySet Name="CCTC_PHONG_BAN" EntityType="Self.CCTC_PHONG_BAN" />
           <EntitySet Name="CN_CHI_TIET_NGHIEP_VU" EntityType="Self.CN_CHI_TIET_NGHIEP_VU" />
           <EntitySet Name="CN_NGHIEP_VU" EntityType="Self.CN_NGHIEP_VU" />
-          <EntitySet Name="DM_HANG_HOA" EntityType="Self.DM_HANG_HOA" />
           <EntitySet Name="DM_HANG_SP" EntityType="Self.DM_HANG_SP" />
           <EntitySet Name="DM_HANG_TON_KHO" EntityType="Self.DM_HANG_TON_KHO" />
           <EntitySet Name="DM_KHO" EntityType="Self.DM_KHO" />
@@ -987,26 +903,6 @@
             <End Role="CN_NGHIEP_VU" EntitySet="CN_NGHIEP_VU" />
             <End Role="CN_CHI_TIET_NGHIEP_VU" EntitySet="CN_CHI_TIET_NGHIEP_VU" />
           </AssociationSet>
-          <AssociationSet Name="FK__DM_HANG_H__MA_NH__59063A47" Association="Self.FK__DM_HANG_H__MA_NH__59063A47">
-            <End Role="DM_HANG_SP" EntitySet="DM_HANG_SP" />
-            <End Role="DM_HANG_HOA" EntitySet="DM_HANG_HOA" />
-          </AssociationSet>
-          <AssociationSet Name="FK__DM_HANG_T__MA_HA__5DCAEF64" Association="Self.FK__DM_HANG_T__MA_HA__5DCAEF64">
-            <End Role="DM_HANG_HOA" EntitySet="DM_HANG_HOA" />
-            <End Role="DM_HANG_TON_KHO" EntitySet="DM_HANG_TON_KHO" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DM_HANG_HOA_DM_TAI_KHOAN_HACH_TOAN" Association="Self.FK_DM_HANG_HOA_DM_TAI_KHOAN_HACH_TOAN">
-            <End Role="DM_TAI_KHOAN_HACH_TOAN" EntitySet="DM_TAI_KHOAN_HACH_TOAN" />
-            <End Role="DM_HANG_HOA" EntitySet="DM_HANG_HOA" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DM_HANG_HOA_DM_TAI_KHOAN_HACH_TOAN1" Association="Self.FK_DM_HANG_HOA_DM_TAI_KHOAN_HACH_TOAN1">
-            <End Role="DM_TAI_KHOAN_HACH_TOAN" EntitySet="DM_TAI_KHOAN_HACH_TOAN" />
-            <End Role="DM_HANG_HOA" EntitySet="DM_HANG_HOA" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DM_HANG_HOA_DM_TAI_KHOAN_HACH_TOAN2" Association="Self.FK_DM_HANG_HOA_DM_TAI_KHOAN_HACH_TOAN2">
-            <End Role="DM_TAI_KHOAN_HACH_TOAN" EntitySet="DM_TAI_KHOAN_HACH_TOAN" />
-            <End Role="DM_HANG_HOA" EntitySet="DM_HANG_HOA" />
-          </AssociationSet>
           <AssociationSet Name="FK__DM_HANG_S__MA_NH__59FA5E80" Association="Self.FK__DM_HANG_S__MA_NH__59FA5E80">
             <End Role="DM_HANG_SP" EntitySet="DM_HANG_SP" />
             <End Role="DM_HANG_SP1" EntitySet="DM_HANG_SP" />
@@ -1040,6 +936,27 @@
           <AssociationSet Name="FK__CN_NGHIEP__ID_NH__5812160E" Association="HOPLONG_DATABASEModel.FK__CN_NGHIEP__ID_NH__5812160E">
             <End Role="HT_NGUOI_DUNG" EntitySet="HT_NGUOI_DUNG" />
             <End Role="CN_NGHIEP_VU_NHAN_VIEN" EntitySet="CN_NGHIEP_VU_NHAN_VIEN" />
+          </AssociationSet>
+          <EntitySet Name="DM_HANG_HOA" EntityType="HOPLONG_DATABASEModel.DM_HANG_HOA" />
+          <AssociationSet Name="FK__DM_HANG_H__MA_NH__59063A47" Association="HOPLONG_DATABASEModel.FK__DM_HANG_H__MA_NH__59063A47">
+            <End Role="DM_HANG_SP" EntitySet="DM_HANG_SP" />
+            <End Role="DM_HANG_HOA" EntitySet="DM_HANG_HOA" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DM_HANG_T__MA_HA__5DCAEF64" Association="HOPLONG_DATABASEModel.FK__DM_HANG_T__MA_HA__5DCAEF64">
+            <End Role="DM_HANG_HOA" EntitySet="DM_HANG_HOA" />
+            <End Role="DM_HANG_TON_KHO" EntitySet="DM_HANG_TON_KHO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DM_HANG_HOA_DM_TAI_KHOAN_HACH_TOAN" Association="HOPLONG_DATABASEModel.FK_DM_HANG_HOA_DM_TAI_KHOAN_HACH_TOAN">
+            <End Role="DM_TAI_KHOAN_HACH_TOAN" EntitySet="DM_TAI_KHOAN_HACH_TOAN" />
+            <End Role="DM_HANG_HOA" EntitySet="DM_HANG_HOA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DM_HANG_HOA_DM_TAI_KHOAN_HACH_TOAN1" Association="HOPLONG_DATABASEModel.FK_DM_HANG_HOA_DM_TAI_KHOAN_HACH_TOAN1">
+            <End Role="DM_TAI_KHOAN_HACH_TOAN" EntitySet="DM_TAI_KHOAN_HACH_TOAN" />
+            <End Role="DM_HANG_HOA" EntitySet="DM_HANG_HOA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DM_HANG_HOA_DM_TAI_KHOAN_HACH_TOAN2" Association="HOPLONG_DATABASEModel.FK_DM_HANG_HOA_DM_TAI_KHOAN_HACH_TOAN2">
+            <End Role="DM_TAI_KHOAN_HACH_TOAN" EntitySet="DM_TAI_KHOAN_HACH_TOAN" />
+            <End Role="DM_HANG_HOA" EntitySet="DM_HANG_HOA" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="CN_NHOM_NGHIEP_VU">
@@ -1092,6 +1009,89 @@
             </Principal>
             <Dependent Role="CN_NGHIEP_VU_NHAN_VIEN">
               <PropertyRef Name="ID_NGUOI_DUNG" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="DM_HANG_HOA">
+          <Key>
+            <PropertyRef Name="MA_HANG_HT" />
+          </Key>
+          <Property Name="MA_HANG_HT" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="MA_HANG_NHAP" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="TEN_HANG" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MA_NHOM_HANG" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="SERI" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="DON_VI_TINH" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="MODEL_DAC_BIET" Type="Boolean" />
+          <Property Name="HINH_ANH" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="DAC_TINH" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="GHI_CHU" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TK_HACH_TOAN_KHO" Type="Int32" />
+          <Property Name="TK_DOANH_THU" Type="Int32" />
+          <Property Name="TK_CHI_PHI" Type="Int32" />
+          <NavigationProperty Name="DM_HANG_SP" Relationship="HOPLONG_DATABASEModel.FK__DM_HANG_H__MA_NH__59063A47" FromRole="DM_HANG_HOA" ToRole="DM_HANG_SP" />
+          <NavigationProperty Name="DM_HANG_TON_KHO" Relationship="HOPLONG_DATABASEModel.FK__DM_HANG_T__MA_HA__5DCAEF64" FromRole="DM_HANG_HOA" ToRole="DM_HANG_TON_KHO" />
+          <NavigationProperty Name="DM_TAI_KHOAN_HACH_TOAN" Relationship="HOPLONG_DATABASEModel.FK_DM_HANG_HOA_DM_TAI_KHOAN_HACH_TOAN" FromRole="DM_HANG_HOA" ToRole="DM_TAI_KHOAN_HACH_TOAN" />
+          <NavigationProperty Name="DM_TAI_KHOAN_HACH_TOAN1" Relationship="HOPLONG_DATABASEModel.FK_DM_HANG_HOA_DM_TAI_KHOAN_HACH_TOAN1" FromRole="DM_HANG_HOA" ToRole="DM_TAI_KHOAN_HACH_TOAN" />
+          <NavigationProperty Name="DM_TAI_KHOAN_HACH_TOAN2" Relationship="HOPLONG_DATABASEModel.FK_DM_HANG_HOA_DM_TAI_KHOAN_HACH_TOAN2" FromRole="DM_HANG_HOA" ToRole="DM_TAI_KHOAN_HACH_TOAN" />
+        </EntityType>
+        <Association Name="FK__DM_HANG_H__MA_NH__59063A47">
+          <End Type="HOPLONG_DATABASEModel.DM_HANG_SP" Role="DM_HANG_SP" Multiplicity="1" />
+          <End Type="HOPLONG_DATABASEModel.DM_HANG_HOA" Role="DM_HANG_HOA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DM_HANG_SP">
+              <PropertyRef Name="MA_NHOM_HANG" />
+            </Principal>
+            <Dependent Role="DM_HANG_HOA">
+              <PropertyRef Name="MA_NHOM_HANG" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DM_HANG_T__MA_HA__5DCAEF64">
+          <End Type="HOPLONG_DATABASEModel.DM_HANG_HOA" Role="DM_HANG_HOA" Multiplicity="1" />
+          <End Type="HOPLONG_DATABASEModel.DM_HANG_TON_KHO" Role="DM_HANG_TON_KHO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DM_HANG_HOA">
+              <PropertyRef Name="MA_HANG_HT" />
+            </Principal>
+            <Dependent Role="DM_HANG_TON_KHO">
+              <PropertyRef Name="MA_HANG_HT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DM_HANG_HOA_DM_TAI_KHOAN_HACH_TOAN">
+          <End Type="HOPLONG_DATABASEModel.DM_TAI_KHOAN_HACH_TOAN" Role="DM_TAI_KHOAN_HACH_TOAN" Multiplicity="0..1" />
+          <End Type="HOPLONG_DATABASEModel.DM_HANG_HOA" Role="DM_HANG_HOA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DM_TAI_KHOAN_HACH_TOAN">
+              <PropertyRef Name="SO_TK" />
+            </Principal>
+            <Dependent Role="DM_HANG_HOA">
+              <PropertyRef Name="TK_HACH_TOAN_KHO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DM_HANG_HOA_DM_TAI_KHOAN_HACH_TOAN1">
+          <End Type="HOPLONG_DATABASEModel.DM_TAI_KHOAN_HACH_TOAN" Role="DM_TAI_KHOAN_HACH_TOAN" Multiplicity="0..1" />
+          <End Type="HOPLONG_DATABASEModel.DM_HANG_HOA" Role="DM_HANG_HOA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DM_TAI_KHOAN_HACH_TOAN">
+              <PropertyRef Name="SO_TK" />
+            </Principal>
+            <Dependent Role="DM_HANG_HOA">
+              <PropertyRef Name="TK_DOANH_THU" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DM_HANG_HOA_DM_TAI_KHOAN_HACH_TOAN2">
+          <End Type="HOPLONG_DATABASEModel.DM_TAI_KHOAN_HACH_TOAN" Role="DM_TAI_KHOAN_HACH_TOAN" Multiplicity="0..1" />
+          <End Type="HOPLONG_DATABASEModel.DM_HANG_HOA" Role="DM_HANG_HOA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DM_TAI_KHOAN_HACH_TOAN">
+              <PropertyRef Name="SO_TK" />
+            </Principal>
+            <Dependent Role="DM_HANG_HOA">
+              <PropertyRef Name="TK_CHI_PHI" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1167,25 +1167,6 @@
               <MappingFragment StoreEntitySet="CN_NGHIEP_VU">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="TEN_NGHIEP_VU" ColumnName="TEN_NGHIEP_VU" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="DM_HANG_HOA">
-            <EntityTypeMapping TypeName="HOPLONG_DATABASEModel.DM_HANG_HOA">
-              <MappingFragment StoreEntitySet="DM_HANG_HOA">
-                <ScalarProperty Name="MA_HANG_HT" ColumnName="MA_HANG_HT" />
-                <ScalarProperty Name="MA_HANG_NHAP" ColumnName="MA_HANG_NHAP" />
-                <ScalarProperty Name="TEN_HANG" ColumnName="TEN_HANG" />
-                <ScalarProperty Name="MA_NHOM_HANG" ColumnName="MA_NHOM_HANG" />
-                <ScalarProperty Name="SERI" ColumnName="SERI" />
-                <ScalarProperty Name="DON_VI_TINH" ColumnName="DON_VI_TINH" />
-                <ScalarProperty Name="MODEL_DAC_BIET" ColumnName="MODEL_DAC_BIET" />
-                <ScalarProperty Name="HINH_ANH" ColumnName="HINH_ANH" />
-                <ScalarProperty Name="DAC_TINH" ColumnName="DAC_TINH" />
-                <ScalarProperty Name="GHI_CHU" ColumnName="GHI_CHU" />
-                <ScalarProperty Name="TK_HACH_TOAN_KHO" ColumnName="TK_HACH_TOAN_KHO" />
-                <ScalarProperty Name="TK_DOANH_THU" ColumnName="TK_DOANH_THU" />
-                <ScalarProperty Name="TK_CHI_PHI" ColumnName="TK_CHI_PHI" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1279,6 +1260,25 @@
                 <ScalarProperty Name="MO_TA" ColumnName="MO_TA" />
                 <ScalarProperty Name="ID_NGUOI_DUNG" ColumnName="ID_NGUOI_DUNG" />
                 <ScalarProperty Name="ID_CHI_TIET_NGHIEP_VU" ColumnName="ID_CHI_TIET_NGHIEP_VU" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DM_HANG_HOA">
+            <EntityTypeMapping TypeName="HOPLONG_DATABASEModel.DM_HANG_HOA">
+              <MappingFragment StoreEntitySet="DM_HANG_HOA">
+                <ScalarProperty Name="TK_CHI_PHI" ColumnName="TK_CHI_PHI" />
+                <ScalarProperty Name="TK_DOANH_THU" ColumnName="TK_DOANH_THU" />
+                <ScalarProperty Name="TK_HACH_TOAN_KHO" ColumnName="TK_HACH_TOAN_KHO" />
+                <ScalarProperty Name="GHI_CHU" ColumnName="GHI_CHU" />
+                <ScalarProperty Name="DAC_TINH" ColumnName="DAC_TINH" />
+                <ScalarProperty Name="HINH_ANH" ColumnName="HINH_ANH" />
+                <ScalarProperty Name="MODEL_DAC_BIET" ColumnName="MODEL_DAC_BIET" />
+                <ScalarProperty Name="DON_VI_TINH" ColumnName="DON_VI_TINH" />
+                <ScalarProperty Name="SERI" ColumnName="SERI" />
+                <ScalarProperty Name="MA_NHOM_HANG" ColumnName="MA_NHOM_HANG" />
+                <ScalarProperty Name="TEN_HANG" ColumnName="TEN_HANG" />
+                <ScalarProperty Name="MA_HANG_NHAP" ColumnName="MA_HANG_NHAP" />
+                <ScalarProperty Name="MA_HANG_HT" ColumnName="MA_HANG_HT" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
