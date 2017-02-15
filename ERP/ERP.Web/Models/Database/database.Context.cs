@@ -31,7 +31,6 @@ namespace ERP.Web.Models.Database
         public DbSet<CCTC_PHONG_BAN> CCTC_PHONG_BAN { get; set; }
         public DbSet<CN_CHI_TIET_NGHIEP_VU> CN_CHI_TIET_NGHIEP_VU { get; set; }
         public DbSet<CN_NGHIEP_VU> CN_NGHIEP_VU { get; set; }
-        public DbSet<DM_HANG_HOA> DM_HANG_HOA { get; set; }
         public DbSet<DM_HANG_SP> DM_HANG_SP { get; set; }
         public DbSet<DM_HANG_TON_KHO> DM_HANG_TON_KHO { get; set; }
         public DbSet<DM_KHO> DM_KHO { get; set; }
@@ -39,5 +38,6 @@ namespace ERP.Web.Models.Database
         public DbSet<HT_NGUOI_DUNG> HT_NGUOI_DUNG { get; set; }
         public DbSet<CN_NHOM_NGHIEP_VU> CN_NHOM_NGHIEP_VU { get; set; }
         public DbSet<CN_NGHIEP_VU_NHAN_VIEN> CN_NGHIEP_VU_NHAN_VIEN { get; set; }
+        public DbSet<DM_HANG_HOA> DM_HANG_HOA { get; set; }
     }
 }

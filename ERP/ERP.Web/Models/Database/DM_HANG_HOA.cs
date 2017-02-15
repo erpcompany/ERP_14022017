@@ -26,7 +26,7 @@ namespace ERP.Web.Models.Database
         public string SERI { get; set; }
         public string DON_VI_TINH { get; set; }
         public Nullable<bool> MODEL_DAC_BIET { get; set; }
-        public byte[] HINH_ANH { get; set; }
+        public string HINH_ANH { get; set; }
         public string DAC_TINH { get; set; }
         public string GHI_CHU { get; set; }
         public Nullable<int> TK_HACH_TOAN_KHO { get; set; }
