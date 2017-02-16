@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "layout";
-    if (Session["ID"] == null)
+    if (Session["USERNAME"] == null)
     {
         Response.Redirect("~/Home/Login");
     }

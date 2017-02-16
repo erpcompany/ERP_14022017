@@ -33,9 +33,9 @@
         </EntityType>
         <EntityType Name="CCTC_NHAN_VIEN">
           <Key>
-            <PropertyRef Name="ID" />
+            <PropertyRef Name="USERNAME" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="USERNAME" Type="varchar" MaxLength="64" Nullable="false" />
           <Property Name="GIOI_TINH" Type="nvarchar" MaxLength="5" />
           <Property Name="NGAY_SINH" Type="date" />
           <Property Name="QUE_QUAN" Type="nvarchar" MaxLength="64" />
@@ -79,10 +79,10 @@
         <EntityType Name="CN_NGHIEP_VU_NHAN_VIEN">
           <Key>
             <PropertyRef Name="ID_CHI_TIET_NGHIEP_VU" />
-            <PropertyRef Name="ID_NGUOI_DUNG" />
+            <PropertyRef Name="USERNAME" />
           </Key>
           <Property Name="ID_CHI_TIET_NGHIEP_VU" Type="int" Nullable="false" />
-          <Property Name="ID_NGUOI_DUNG" Type="int" Nullable="false" />
+          <Property Name="USERNAME" Type="varchar" MaxLength="64" Nullable="false" />
           <Property Name="MO_TA" Type="nvarchar" MaxLength="256" />
         </EntityType>
         <EntityType Name="CN_NHOM_NGHIEP_VU">
@@ -171,9 +171,8 @@
         </EntityType>
         <EntityType Name="HT_NGUOI_DUNG">
           <Key>
-            <PropertyRef Name="ID" />
+            <PropertyRef Name="USERNAME" />
           </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="USERNAME" Type="varchar" MaxLength="64" Nullable="false" />
           <Property Name="PASSWORD" Type="varchar" MaxLength="256" Nullable="false" />
           <Property Name="HO_VA_TEN" Type="nvarchar" MaxLength="64" Nullable="false" />
@@ -196,15 +195,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__CCTC_NHAN_VI__ID__07C12930">
+        <Association Name="FK__CCTC_NHAN__USERN__5224328E">
           <End Role="HT_NGUOI_DUNG" Type="Self.HT_NGUOI_DUNG" Multiplicity="1" />
           <End Role="CCTC_NHAN_VIEN" Type="Self.CCTC_NHAN_VIEN" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="HT_NGUOI_DUNG">
-              <PropertyRef Name="ID" />
+              <PropertyRef Name="USERNAME" />
             </Principal>
             <Dependent Role="CCTC_NHAN_VIEN">
-              <PropertyRef Name="ID" />
+              <PropertyRef Name="USERNAME" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -253,30 +252,6 @@
             </Principal>
             <Dependent Role="CN_NGHIEP_VU_NHAN_VIEN">
               <PropertyRef Name="ID_CHI_TIET_NGHIEP_VU" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__CN_NGHIEP__ID_NH__5812160E">
-          <End Role="HT_NGUOI_DUNG" Type="Self.HT_NGUOI_DUNG" Multiplicity="1" />
-          <End Role="CN_NGHIEP_VU_NHAN_VIEN" Type="Self.CN_NGHIEP_VU_NHAN_VIEN" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="HT_NGUOI_DUNG">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="CN_NGHIEP_VU_NHAN_VIEN">
-              <PropertyRef Name="ID_NGUOI_DUNG" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__CN_NHOM_N__ID_NG__1BC821DD">
-          <End Role="HT_NGUOI_DUNG" Type="Self.HT_NGUOI_DUNG" Multiplicity="1" />
-          <End Role="CN_NHOM_NGUOI_DUNG_NGHIEP_VU" Type="Self.CN_NHOM_NGUOI_DUNG_NGHIEP_VU" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="HT_NGUOI_DUNG">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="CN_NHOM_NGUOI_DUNG_NGHIEP_VU">
-              <PropertyRef Name="ID_NGUOI_DUNG" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -448,6 +423,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_CN_NGHIEP_VU_NHAN_VIEN_HT_NGUOI_DUNG">
+          <End Role="HT_NGUOI_DUNG" Type="Self.HT_NGUOI_DUNG" Multiplicity="1" />
+          <End Role="CN_NGHIEP_VU_NHAN_VIEN" Type="Self.CN_NGHIEP_VU_NHAN_VIEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HT_NGUOI_DUNG">
+              <PropertyRef Name="USERNAME" />
+            </Principal>
+            <Dependent Role="CN_NGHIEP_VU_NHAN_VIEN">
+              <PropertyRef Name="USERNAME" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_DM_HANG_HOA_DM_TAI_KHOAN_HACH_TOAN">
           <End Role="DM_TAI_KHOAN_HACH_TOAN" Type="Self.DM_TAI_KHOAN_HACH_TOAN" Multiplicity="0..1" />
           <End Role="DM_HANG_HOA" Type="Self.DM_HANG_HOA" Multiplicity="*" />
@@ -506,7 +493,7 @@
             <End Role="CCTC_PHONG_BAN" EntitySet="CCTC_PHONG_BAN" />
             <End Role="CCTC_NHAN_VIEN" EntitySet="CCTC_NHAN_VIEN" />
           </AssociationSet>
-          <AssociationSet Name="FK__CCTC_NHAN_VI__ID__07C12930" Association="Self.FK__CCTC_NHAN_VI__ID__07C12930">
+          <AssociationSet Name="FK__CCTC_NHAN__USERN__5224328E" Association="Self.FK__CCTC_NHAN__USERN__5224328E">
             <End Role="HT_NGUOI_DUNG" EntitySet="HT_NGUOI_DUNG" />
             <End Role="CCTC_NHAN_VIEN" EntitySet="CCTC_NHAN_VIEN" />
           </AssociationSet>
@@ -525,14 +512,6 @@
           <AssociationSet Name="FK__CN_NGHIEP__ID_CH__571DF1D5" Association="Self.FK__CN_NGHIEP__ID_CH__571DF1D5">
             <End Role="CN_CHI_TIET_NGHIEP_VU" EntitySet="CN_CHI_TIET_NGHIEP_VU" />
             <End Role="CN_NGHIEP_VU_NHAN_VIEN" EntitySet="CN_NGHIEP_VU_NHAN_VIEN" />
-          </AssociationSet>
-          <AssociationSet Name="FK__CN_NGHIEP__ID_NH__5812160E" Association="Self.FK__CN_NGHIEP__ID_NH__5812160E">
-            <End Role="HT_NGUOI_DUNG" EntitySet="HT_NGUOI_DUNG" />
-            <End Role="CN_NGHIEP_VU_NHAN_VIEN" EntitySet="CN_NGHIEP_VU_NHAN_VIEN" />
-          </AssociationSet>
-          <AssociationSet Name="FK__CN_NHOM_N__ID_NG__1BC821DD" Association="Self.FK__CN_NHOM_N__ID_NG__1BC821DD">
-            <End Role="HT_NGUOI_DUNG" EntitySet="HT_NGUOI_DUNG" />
-            <End Role="CN_NHOM_NGUOI_DUNG_NGHIEP_VU" EntitySet="CN_NHOM_NGUOI_DUNG_NGHIEP_VU" />
           </AssociationSet>
           <AssociationSet Name="FK__CN_NHOM_N__ID_NH__1CBC4616" Association="Self.FK__CN_NHOM_N__ID_NH__1CBC4616">
             <End Role="CN_NHOM_NGHIEP_VU" EntitySet="CN_NHOM_NGHIEP_VU" />
@@ -590,6 +569,10 @@
             <End Role="CCTC_CONG_TY" EntitySet="CCTC_CONG_TY" />
             <End Role="CCTC_PHONG_BAN" EntitySet="CCTC_PHONG_BAN" />
           </AssociationSet>
+          <AssociationSet Name="FK_CN_NGHIEP_VU_NHAN_VIEN_HT_NGUOI_DUNG" Association="Self.FK_CN_NGHIEP_VU_NHAN_VIEN_HT_NGUOI_DUNG">
+            <End Role="HT_NGUOI_DUNG" EntitySet="HT_NGUOI_DUNG" />
+            <End Role="CN_NGHIEP_VU_NHAN_VIEN" EntitySet="CN_NGHIEP_VU_NHAN_VIEN" />
+          </AssociationSet>
           <AssociationSet Name="FK_DM_HANG_HOA_DM_TAI_KHOAN_HACH_TOAN" Association="Self.FK_DM_HANG_HOA_DM_TAI_KHOAN_HACH_TOAN">
             <End Role="DM_TAI_KHOAN_HACH_TOAN" EntitySet="DM_TAI_KHOAN_HACH_TOAN" />
             <End Role="DM_HANG_HOA" EntitySet="DM_HANG_HOA" />
@@ -616,19 +599,6 @@
           <Property Name="GHI_CHU" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="CCTC_CONG_TY" Relationship="HOPLONG_DATABASEModel.FK__NB_CONG_T__MO_HI__1367E606" FromRole="CCTC_MO_HINH_CONG_TY" ToRole="CCTC_CONG_TY" />
         </EntityType>
-        <EntityType Name="CCTC_NHAN_VIEN">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="GIOI_TINH" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
-          <Property Name="NGAY_SINH" Type="DateTime" Precision="0" />
-          <Property Name="QUE_QUAN" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
-          <Property Name="TRINH_DO_HOC_VAN" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
-          <Property Name="MA_PHONG_BAN" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="CCTC_PHONG_BAN" Relationship="Self.FK__CCTC_NHAN__MA_PH__08B54D69" FromRole="CCTC_NHAN_VIEN" ToRole="CCTC_PHONG_BAN" />
-          <NavigationProperty Name="HT_NGUOI_DUNG" Relationship="Self.FK__CCTC_NHAN_VI__ID__07C12930" FromRole="CCTC_NHAN_VIEN" ToRole="HT_NGUOI_DUNG" />
-        </EntityType>
         <EntityType Name="CCTC_PHONG_BAN">
           <Key>
             <PropertyRef Name="MA_PHONG_BAN" />
@@ -638,8 +608,8 @@
           <Property Name="SDT" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
           <Property Name="MA_CONG_TY" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Name="GHI_CHU" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="CCTC_NHAN_VIEN" Relationship="Self.FK__CCTC_NHAN__MA_PH__08B54D69" FromRole="CCTC_PHONG_BAN" ToRole="CCTC_NHAN_VIEN" />
           <NavigationProperty Name="CCTC_CONG_TY" Relationship="HOPLONG_DATABASEModel.FK__NB_PHONG___MA_CO__164452B1" FromRole="CCTC_PHONG_BAN" ToRole="CCTC_CONG_TY" />
+          <NavigationProperty Name="CCTC_NHAN_VIEN" Relationship="HOPLONG_DATABASEModel.FK__CCTC_NHAN__MA_PH__08B54D69" FromRole="CCTC_PHONG_BAN" ToRole="CCTC_NHAN_VIEN" />
         </EntityType>
         <EntityType Name="CN_CHI_TIET_NGHIEP_VU">
           <Key>
@@ -701,49 +671,6 @@
           <NavigationProperty Name="DM_HANG_HOA1" Relationship="HOPLONG_DATABASEModel.FK_DM_HANG_HOA_DM_TAI_KHOAN_HACH_TOAN1" FromRole="DM_TAI_KHOAN_HACH_TOAN" ToRole="DM_HANG_HOA" />
           <NavigationProperty Name="DM_HANG_HOA2" Relationship="HOPLONG_DATABASEModel.FK_DM_HANG_HOA_DM_TAI_KHOAN_HACH_TOAN2" FromRole="DM_TAI_KHOAN_HACH_TOAN" ToRole="DM_HANG_HOA" />
         </EntityType>
-        <EntityType Name="HT_NGUOI_DUNG">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="USERNAME" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="PASSWORD" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="HO_VA_TEN" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="SDT" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
-          <Property Name="EMAIL" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
-          <Property Name="AVATAR" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
-          <Property Name="IS_ADMIN" Type="Boolean" />
-          <Property Name="ALLOWED" Type="Boolean" Nullable="false" />
-          <Property Name="MA_CONG_TY" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="CCTC_NHAN_VIEN" Relationship="Self.FK__CCTC_NHAN_VI__ID__07C12930" FromRole="HT_NGUOI_DUNG" ToRole="CCTC_NHAN_VIEN" />
-          <NavigationProperty Name="CN_NHOM_NGHIEP_VU" Relationship="HOPLONG_DATABASEModel.CN_NHOM_NGUOI_DUNG_NGHIEP_VU" FromRole="HT_NGUOI_DUNG" ToRole="CN_NHOM_NGHIEP_VU" />
-          <NavigationProperty Name="CN_NGHIEP_VU_NHAN_VIEN" Relationship="HOPLONG_DATABASEModel.FK__CN_NGHIEP__ID_NH__5812160E" FromRole="HT_NGUOI_DUNG" ToRole="CN_NGHIEP_VU_NHAN_VIEN" />
-          <NavigationProperty Name="CCTC_CONG_TY" Relationship="HOPLONG_DATABASEModel.FK__HT_NGUOI___MA_CO__09A971A2" FromRole="HT_NGUOI_DUNG" ToRole="CCTC_CONG_TY" />
-        </EntityType>
-        <Association Name="FK__CCTC_NHAN__MA_PH__08B54D69">
-          <End Role="CCTC_PHONG_BAN" Type="Self.CCTC_PHONG_BAN" Multiplicity="0..1" />
-          <End Role="CCTC_NHAN_VIEN" Type="Self.CCTC_NHAN_VIEN" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CCTC_PHONG_BAN">
-              <PropertyRef Name="MA_PHONG_BAN" />
-            </Principal>
-            <Dependent Role="CCTC_NHAN_VIEN">
-              <PropertyRef Name="MA_PHONG_BAN" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__CCTC_NHAN_VI__ID__07C12930">
-          <End Role="HT_NGUOI_DUNG" Type="Self.HT_NGUOI_DUNG" Multiplicity="1" />
-          <End Role="CCTC_NHAN_VIEN" Type="Self.CCTC_NHAN_VIEN" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="HT_NGUOI_DUNG">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="CCTC_NHAN_VIEN">
-              <PropertyRef Name="ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__CN_CHI_TI__ID_NG__5629CD9C">
           <End Role="CN_NGHIEP_VU" Type="Self.CN_NGHIEP_VU" Multiplicity="0..1" />
           <End Role="CN_CHI_TIET_NGHIEP_VU" Type="Self.CN_CHI_TIET_NGHIEP_VU" Multiplicity="*" />
@@ -782,22 +709,12 @@
         </Association>
         <EntityContainer Name="HOPLONG_DATABASEEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="CCTC_MO_HINH_CONG_TY" EntityType="Self.CCTC_MO_HINH_CONG_TY" />
-          <EntitySet Name="CCTC_NHAN_VIEN" EntityType="Self.CCTC_NHAN_VIEN" />
           <EntitySet Name="CCTC_PHONG_BAN" EntityType="Self.CCTC_PHONG_BAN" />
           <EntitySet Name="CN_CHI_TIET_NGHIEP_VU" EntityType="Self.CN_CHI_TIET_NGHIEP_VU" />
           <EntitySet Name="CN_NGHIEP_VU" EntityType="Self.CN_NGHIEP_VU" />
           <EntitySet Name="DM_HANG_SP" EntityType="Self.DM_HANG_SP" />
           <EntitySet Name="DM_HANG_TON_KHO" EntityType="Self.DM_HANG_TON_KHO" />
           <EntitySet Name="DM_TAI_KHOAN_HACH_TOAN" EntityType="Self.DM_TAI_KHOAN_HACH_TOAN" />
-          <EntitySet Name="HT_NGUOI_DUNG" EntityType="Self.HT_NGUOI_DUNG" />
-          <AssociationSet Name="FK__CCTC_NHAN__MA_PH__08B54D69" Association="Self.FK__CCTC_NHAN__MA_PH__08B54D69">
-            <End Role="CCTC_PHONG_BAN" EntitySet="CCTC_PHONG_BAN" />
-            <End Role="CCTC_NHAN_VIEN" EntitySet="CCTC_NHAN_VIEN" />
-          </AssociationSet>
-          <AssociationSet Name="FK__CCTC_NHAN_VI__ID__07C12930" Association="Self.FK__CCTC_NHAN_VI__ID__07C12930">
-            <End Role="HT_NGUOI_DUNG" EntitySet="HT_NGUOI_DUNG" />
-            <End Role="CCTC_NHAN_VIEN" EntitySet="CCTC_NHAN_VIEN" />
-          </AssociationSet>
           <AssociationSet Name="FK__CN_CHI_TI__ID_NG__5629CD9C" Association="Self.FK__CN_CHI_TI__ID_NG__5629CD9C">
             <End Role="CN_NGHIEP_VU" EntitySet="CN_NGHIEP_VU" />
             <End Role="CN_CHI_TIET_NGHIEP_VU" EntitySet="CN_CHI_TIET_NGHIEP_VU" />
@@ -814,19 +731,6 @@
           <AssociationSet Name="CN_CHI_TIET_NHOM_NGHIEP_VU" Association="HOPLONG_DATABASEModel.CN_CHI_TIET_NHOM_NGHIEP_VU">
             <End Role="CN_CHI_TIET_NGHIEP_VU" EntitySet="CN_CHI_TIET_NGHIEP_VU" />
             <End Role="CN_NHOM_NGHIEP_VU" EntitySet="CN_NHOM_NGHIEP_VU" />
-          </AssociationSet>
-          <AssociationSet Name="CN_NHOM_NGUOI_DUNG_NGHIEP_VU" Association="HOPLONG_DATABASEModel.CN_NHOM_NGUOI_DUNG_NGHIEP_VU">
-            <End Role="HT_NGUOI_DUNG" EntitySet="HT_NGUOI_DUNG" />
-            <End Role="CN_NHOM_NGHIEP_VU" EntitySet="CN_NHOM_NGHIEP_VU" />
-          </AssociationSet>
-          <EntitySet Name="CN_NGHIEP_VU_NHAN_VIEN" EntityType="HOPLONG_DATABASEModel.CN_NGHIEP_VU_NHAN_VIEN" />
-          <AssociationSet Name="FK__CN_NGHIEP__ID_CH__571DF1D5" Association="HOPLONG_DATABASEModel.FK__CN_NGHIEP__ID_CH__571DF1D5">
-            <End Role="CN_CHI_TIET_NGHIEP_VU" EntitySet="CN_CHI_TIET_NGHIEP_VU" />
-            <End Role="CN_NGHIEP_VU_NHAN_VIEN" EntitySet="CN_NGHIEP_VU_NHAN_VIEN" />
-          </AssociationSet>
-          <AssociationSet Name="FK__CN_NGHIEP__ID_NH__5812160E" Association="HOPLONG_DATABASEModel.FK__CN_NGHIEP__ID_NH__5812160E">
-            <End Role="HT_NGUOI_DUNG" EntitySet="HT_NGUOI_DUNG" />
-            <End Role="CN_NGHIEP_VU_NHAN_VIEN" EntitySet="CN_NGHIEP_VU_NHAN_VIEN" />
           </AssociationSet>
           <EntitySet Name="DM_HANG_HOA" EntityType="HOPLONG_DATABASEModel.DM_HANG_HOA" />
           <AssociationSet Name="FK__DM_HANG_H__MA_NH__59063A47" Association="HOPLONG_DATABASEModel.FK__DM_HANG_H__MA_NH__59063A47">
@@ -864,10 +768,6 @@
             <End Role="CCTC_CONG_TY" EntitySet="CCTC_CONG_TY" />
             <End Role="DM_KHO" EntitySet="DM_KHO" />
           </AssociationSet>
-          <AssociationSet Name="FK__HT_NGUOI___MA_CO__09A971A2" Association="HOPLONG_DATABASEModel.FK__HT_NGUOI___MA_CO__09A971A2">
-            <End Role="CCTC_CONG_TY" EntitySet="CCTC_CONG_TY" />
-            <End Role="HT_NGUOI_DUNG" EntitySet="HT_NGUOI_DUNG" />
-          </AssociationSet>
           <AssociationSet Name="FK__NB_CONG_T__CONG___1273C1CD" Association="HOPLONG_DATABASEModel.FK__NB_CONG_T__CONG___1273C1CD">
             <End Role="CCTC_CONG_TY" EntitySet="CCTC_CONG_TY" />
             <End Role="CCTC_CONG_TY1" EntitySet="CCTC_CONG_TY" />
@@ -888,6 +788,34 @@
             <End Role="DM_KHO" EntitySet="DM_KHO" />
             <End Role="DM_KHO1" EntitySet="DM_KHO" />
           </AssociationSet>
+          <EntitySet Name="CCTC_NHAN_VIEN" EntityType="HOPLONG_DATABASEModel.CCTC_NHAN_VIEN" />
+          <EntitySet Name="CN_NGHIEP_VU_NHAN_VIEN" EntityType="HOPLONG_DATABASEModel.CN_NGHIEP_VU_NHAN_VIEN" />
+          <EntitySet Name="CN_NHOM_NGUOI_DUNG_NGHIEP_VU" EntityType="HOPLONG_DATABASEModel.CN_NHOM_NGUOI_DUNG_NGHIEP_VU" />
+          <EntitySet Name="HT_NGUOI_DUNG" EntityType="HOPLONG_DATABASEModel.HT_NGUOI_DUNG" />
+          <AssociationSet Name="FK__HT_NGUOI___MA_CO__09A971A2" Association="HOPLONG_DATABASEModel.FK__HT_NGUOI___MA_CO__09A971A2">
+            <End Role="CCTC_CONG_TY" EntitySet="CCTC_CONG_TY" />
+            <End Role="HT_NGUOI_DUNG" EntitySet="HT_NGUOI_DUNG" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CCTC_NHAN__MA_PH__08B54D69" Association="HOPLONG_DATABASEModel.FK__CCTC_NHAN__MA_PH__08B54D69">
+            <End Role="CCTC_PHONG_BAN" EntitySet="CCTC_PHONG_BAN" />
+            <End Role="CCTC_NHAN_VIEN" EntitySet="CCTC_NHAN_VIEN" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CCTC_NHAN__USERN__5224328E" Association="HOPLONG_DATABASEModel.FK__CCTC_NHAN__USERN__5224328E">
+            <End Role="HT_NGUOI_DUNG" EntitySet="HT_NGUOI_DUNG" />
+            <End Role="CCTC_NHAN_VIEN" EntitySet="CCTC_NHAN_VIEN" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CN_NGHIEP__ID_CH__571DF1D5" Association="HOPLONG_DATABASEModel.FK__CN_NGHIEP__ID_CH__571DF1D5">
+            <End Role="CN_CHI_TIET_NGHIEP_VU" EntitySet="CN_CHI_TIET_NGHIEP_VU" />
+            <End Role="CN_NGHIEP_VU_NHAN_VIEN" EntitySet="CN_NGHIEP_VU_NHAN_VIEN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CN_NGHIEP_VU_NHAN_VIEN_HT_NGUOI_DUNG" Association="HOPLONG_DATABASEModel.FK_CN_NGHIEP_VU_NHAN_VIEN_HT_NGUOI_DUNG">
+            <End Role="HT_NGUOI_DUNG" EntitySet="HT_NGUOI_DUNG" />
+            <End Role="CN_NGHIEP_VU_NHAN_VIEN" EntitySet="CN_NGHIEP_VU_NHAN_VIEN" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CN_NHOM_N__ID_NH__1CBC4616" Association="HOPLONG_DATABASEModel.FK__CN_NHOM_N__ID_NH__1CBC4616">
+            <End Role="CN_NHOM_NGHIEP_VU" EntitySet="CN_NHOM_NGHIEP_VU" />
+            <End Role="CN_NHOM_NGUOI_DUNG_NGHIEP_VU" EntitySet="CN_NHOM_NGUOI_DUNG_NGHIEP_VU" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="CN_NHOM_NGHIEP_VU">
           <Key>
@@ -897,50 +825,11 @@
           <Property Name="TEN_NHOM" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
           <Property Name="DIEN_GIAI" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="CN_CHI_TIET_NGHIEP_VU" Relationship="HOPLONG_DATABASEModel.CN_CHI_TIET_NHOM_NGHIEP_VU" FromRole="CN_NHOM_NGHIEP_VU" ToRole="CN_CHI_TIET_NGHIEP_VU" />
-          <NavigationProperty Name="HT_NGUOI_DUNG" Relationship="HOPLONG_DATABASEModel.CN_NHOM_NGUOI_DUNG_NGHIEP_VU" FromRole="CN_NHOM_NGHIEP_VU" ToRole="HT_NGUOI_DUNG" />
+          <NavigationProperty Name="CN_NHOM_NGUOI_DUNG_NGHIEP_VU" Relationship="HOPLONG_DATABASEModel.FK__CN_NHOM_N__ID_NH__1CBC4616" FromRole="CN_NHOM_NGHIEP_VU" ToRole="CN_NHOM_NGUOI_DUNG_NGHIEP_VU" />
         </EntityType>
         <Association Name="CN_CHI_TIET_NHOM_NGHIEP_VU">
           <End Type="HOPLONG_DATABASEModel.CN_CHI_TIET_NGHIEP_VU" Role="CN_CHI_TIET_NGHIEP_VU" Multiplicity="*" />
           <End Type="HOPLONG_DATABASEModel.CN_NHOM_NGHIEP_VU" Role="CN_NHOM_NGHIEP_VU" Multiplicity="*" />
-        </Association>
-        <Association Name="CN_NHOM_NGUOI_DUNG_NGHIEP_VU">
-          <End Type="HOPLONG_DATABASEModel.HT_NGUOI_DUNG" Role="HT_NGUOI_DUNG" Multiplicity="*" />
-          <End Type="HOPLONG_DATABASEModel.CN_NHOM_NGHIEP_VU" Role="CN_NHOM_NGHIEP_VU" Multiplicity="*" />
-        </Association>
-        <EntityType Name="CN_NGHIEP_VU_NHAN_VIEN">
-          <Key>
-            <PropertyRef Name="ID_CHI_TIET_NGHIEP_VU" />
-            <PropertyRef Name="ID_NGUOI_DUNG" />
-          </Key>
-          <Property Name="ID_CHI_TIET_NGHIEP_VU" Type="Int32" Nullable="false" />
-          <Property Name="ID_NGUOI_DUNG" Type="Int32" Nullable="false" />
-          <Property Name="MO_TA" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="CN_CHI_TIET_NGHIEP_VU" Relationship="HOPLONG_DATABASEModel.FK__CN_NGHIEP__ID_CH__571DF1D5" FromRole="CN_NGHIEP_VU_NHAN_VIEN" ToRole="CN_CHI_TIET_NGHIEP_VU" />
-          <NavigationProperty Name="HT_NGUOI_DUNG" Relationship="HOPLONG_DATABASEModel.FK__CN_NGHIEP__ID_NH__5812160E" FromRole="CN_NGHIEP_VU_NHAN_VIEN" ToRole="HT_NGUOI_DUNG" />
-        </EntityType>
-        <Association Name="FK__CN_NGHIEP__ID_CH__571DF1D5">
-          <End Type="HOPLONG_DATABASEModel.CN_CHI_TIET_NGHIEP_VU" Role="CN_CHI_TIET_NGHIEP_VU" Multiplicity="1" />
-          <End Type="HOPLONG_DATABASEModel.CN_NGHIEP_VU_NHAN_VIEN" Role="CN_NGHIEP_VU_NHAN_VIEN" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CN_CHI_TIET_NGHIEP_VU">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="CN_NGHIEP_VU_NHAN_VIEN">
-              <PropertyRef Name="ID_CHI_TIET_NGHIEP_VU" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__CN_NGHIEP__ID_NH__5812160E">
-          <End Type="HOPLONG_DATABASEModel.HT_NGUOI_DUNG" Role="HT_NGUOI_DUNG" Multiplicity="1" />
-          <End Type="HOPLONG_DATABASEModel.CN_NGHIEP_VU_NHAN_VIEN" Role="CN_NGHIEP_VU_NHAN_VIEN" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="HT_NGUOI_DUNG">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="CN_NGHIEP_VU_NHAN_VIEN">
-              <PropertyRef Name="ID_NGUOI_DUNG" />
-            </Dependent>
-          </ReferentialConstraint>
         </Association>
         <EntityType Name="DM_HANG_HOA">
           <Key>
@@ -1080,11 +969,11 @@
           <Property Name="CAP_TO_CHUC" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Name="GHI_CHU" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="DM_KHO" Relationship="HOPLONG_DATABASEModel.FK__DM_KHO__TRUC_THU__6D0D32F4" FromRole="CCTC_CONG_TY" ToRole="DM_KHO" />
-          <NavigationProperty Name="HT_NGUOI_DUNG" Relationship="HOPLONG_DATABASEModel.FK__HT_NGUOI___MA_CO__09A971A2" FromRole="CCTC_CONG_TY" ToRole="HT_NGUOI_DUNG" />
           <NavigationProperty Name="CCTC_CONG_TY1" Relationship="HOPLONG_DATABASEModel.FK__NB_CONG_T__CONG___1273C1CD" FromRole="CCTC_CONG_TY" ToRole="CCTC_CONG_TY1" />
           <NavigationProperty Name="CCTC_CONG_TY2" Relationship="HOPLONG_DATABASEModel.FK__NB_CONG_T__CONG___1273C1CD" FromRole="CCTC_CONG_TY1" ToRole="CCTC_CONG_TY" />
           <NavigationProperty Name="CCTC_MO_HINH_CONG_TY" Relationship="HOPLONG_DATABASEModel.FK__NB_CONG_T__MO_HI__1367E606" FromRole="CCTC_CONG_TY" ToRole="CCTC_MO_HINH_CONG_TY" />
           <NavigationProperty Name="CCTC_PHONG_BAN" Relationship="HOPLONG_DATABASEModel.FK__NB_PHONG___MA_CO__164452B1" FromRole="CCTC_CONG_TY" ToRole="CCTC_PHONG_BAN" />
+          <NavigationProperty Name="HT_NGUOI_DUNG" Relationship="HOPLONG_DATABASEModel.FK__HT_NGUOI___MA_CO__09A971A2" FromRole="CCTC_CONG_TY" ToRole="HT_NGUOI_DUNG" />
         </EntityType>
         <EntityType Name="DM_KHO">
           <Key>
@@ -1110,18 +999,6 @@
             </Principal>
             <Dependent Role="DM_KHO">
               <PropertyRef Name="TRUC_THUOC" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__HT_NGUOI___MA_CO__09A971A2">
-          <End Type="HOPLONG_DATABASEModel.CCTC_CONG_TY" Role="CCTC_CONG_TY" Multiplicity="1" />
-          <End Type="HOPLONG_DATABASEModel.HT_NGUOI_DUNG" Role="HT_NGUOI_DUNG" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CCTC_CONG_TY">
-              <PropertyRef Name="MA_CONG_TY" />
-            </Principal>
-            <Dependent Role="HT_NGUOI_DUNG">
-              <PropertyRef Name="MA_CONG_TY" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1185,6 +1062,128 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="CCTC_NHAN_VIEN">
+          <Key>
+            <PropertyRef Name="USERNAME" />
+          </Key>
+          <Property Name="USERNAME" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="GIOI_TINH" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="NGAY_SINH" Type="DateTime" Precision="0" />
+          <Property Name="QUE_QUAN" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="TRINH_DO_HOC_VAN" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="MA_PHONG_BAN" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CCTC_PHONG_BAN" Relationship="HOPLONG_DATABASEModel.FK__CCTC_NHAN__MA_PH__08B54D69" FromRole="CCTC_NHAN_VIEN" ToRole="CCTC_PHONG_BAN" />
+          <NavigationProperty Name="HT_NGUOI_DUNG" Relationship="HOPLONG_DATABASEModel.FK__CCTC_NHAN__USERN__5224328E" FromRole="CCTC_NHAN_VIEN" ToRole="HT_NGUOI_DUNG" />
+        </EntityType>
+        <EntityType Name="CN_NGHIEP_VU_NHAN_VIEN">
+          <Key>
+            <PropertyRef Name="ID_CHI_TIET_NGHIEP_VU" />
+            <PropertyRef Name="USERNAME" />
+          </Key>
+          <Property Name="ID_CHI_TIET_NGHIEP_VU" Type="Int32" Nullable="false" />
+          <Property Name="USERNAME" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="MO_TA" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CN_CHI_TIET_NGHIEP_VU" Relationship="HOPLONG_DATABASEModel.FK__CN_NGHIEP__ID_CH__571DF1D5" FromRole="CN_NGHIEP_VU_NHAN_VIEN" ToRole="CN_CHI_TIET_NGHIEP_VU" />
+          <NavigationProperty Name="HT_NGUOI_DUNG" Relationship="HOPLONG_DATABASEModel.FK_CN_NGHIEP_VU_NHAN_VIEN_HT_NGUOI_DUNG" FromRole="CN_NGHIEP_VU_NHAN_VIEN" ToRole="HT_NGUOI_DUNG" />
+        </EntityType>
+        <EntityType Name="CN_NHOM_NGUOI_DUNG_NGHIEP_VU">
+          <Key>
+            <PropertyRef Name="ID_NGUOI_DUNG" />
+            <PropertyRef Name="ID_NHOM_NGHIEP_VU" />
+          </Key>
+          <Property Name="ID_NGUOI_DUNG" Type="Int32" Nullable="false" />
+          <Property Name="ID_NHOM_NGHIEP_VU" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CN_NHOM_NGHIEP_VU" Relationship="HOPLONG_DATABASEModel.FK__CN_NHOM_N__ID_NH__1CBC4616" FromRole="CN_NHOM_NGUOI_DUNG_NGHIEP_VU" ToRole="CN_NHOM_NGHIEP_VU" />
+        </EntityType>
+        <EntityType Name="HT_NGUOI_DUNG">
+          <Key>
+            <PropertyRef Name="USERNAME" />
+          </Key>
+          <Property Name="USERNAME" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="PASSWORD" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="HO_VA_TEN" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="SDT" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="EMAIL" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="AVATAR" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="IS_ADMIN" Type="Boolean" />
+          <Property Name="ALLOWED" Type="Boolean" Nullable="false" />
+          <Property Name="MA_CONG_TY" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CCTC_CONG_TY" Relationship="HOPLONG_DATABASEModel.FK__HT_NGUOI___MA_CO__09A971A2" FromRole="HT_NGUOI_DUNG" ToRole="CCTC_CONG_TY" />
+          <NavigationProperty Name="CCTC_NHAN_VIEN" Relationship="HOPLONG_DATABASEModel.FK__CCTC_NHAN__USERN__5224328E" FromRole="HT_NGUOI_DUNG" ToRole="CCTC_NHAN_VIEN" />
+          <NavigationProperty Name="CN_NGHIEP_VU_NHAN_VIEN" Relationship="HOPLONG_DATABASEModel.FK_CN_NGHIEP_VU_NHAN_VIEN_HT_NGUOI_DUNG" FromRole="HT_NGUOI_DUNG" ToRole="CN_NGHIEP_VU_NHAN_VIEN" />
+        </EntityType>
+        <Association Name="FK__HT_NGUOI___MA_CO__09A971A2">
+          <End Type="HOPLONG_DATABASEModel.CCTC_CONG_TY" Role="CCTC_CONG_TY" Multiplicity="1" />
+          <End Type="HOPLONG_DATABASEModel.HT_NGUOI_DUNG" Role="HT_NGUOI_DUNG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CCTC_CONG_TY">
+              <PropertyRef Name="MA_CONG_TY" />
+            </Principal>
+            <Dependent Role="HT_NGUOI_DUNG">
+              <PropertyRef Name="MA_CONG_TY" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CCTC_NHAN__MA_PH__08B54D69">
+          <End Type="HOPLONG_DATABASEModel.CCTC_PHONG_BAN" Role="CCTC_PHONG_BAN" Multiplicity="0..1" />
+          <End Type="HOPLONG_DATABASEModel.CCTC_NHAN_VIEN" Role="CCTC_NHAN_VIEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CCTC_PHONG_BAN">
+              <PropertyRef Name="MA_PHONG_BAN" />
+            </Principal>
+            <Dependent Role="CCTC_NHAN_VIEN">
+              <PropertyRef Name="MA_PHONG_BAN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CCTC_NHAN__USERN__5224328E">
+          <End Type="HOPLONG_DATABASEModel.HT_NGUOI_DUNG" Role="HT_NGUOI_DUNG" Multiplicity="1" />
+          <End Type="HOPLONG_DATABASEModel.CCTC_NHAN_VIEN" Role="CCTC_NHAN_VIEN" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="HT_NGUOI_DUNG">
+              <PropertyRef Name="USERNAME" />
+            </Principal>
+            <Dependent Role="CCTC_NHAN_VIEN">
+              <PropertyRef Name="USERNAME" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CN_NGHIEP__ID_CH__571DF1D5">
+          <End Type="HOPLONG_DATABASEModel.CN_CHI_TIET_NGHIEP_VU" Role="CN_CHI_TIET_NGHIEP_VU" Multiplicity="1" />
+          <End Type="HOPLONG_DATABASEModel.CN_NGHIEP_VU_NHAN_VIEN" Role="CN_NGHIEP_VU_NHAN_VIEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CN_CHI_TIET_NGHIEP_VU">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CN_NGHIEP_VU_NHAN_VIEN">
+              <PropertyRef Name="ID_CHI_TIET_NGHIEP_VU" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CN_NGHIEP_VU_NHAN_VIEN_HT_NGUOI_DUNG">
+          <End Type="HOPLONG_DATABASEModel.HT_NGUOI_DUNG" Role="HT_NGUOI_DUNG" Multiplicity="1" />
+          <End Type="HOPLONG_DATABASEModel.CN_NGHIEP_VU_NHAN_VIEN" Role="CN_NGHIEP_VU_NHAN_VIEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HT_NGUOI_DUNG">
+              <PropertyRef Name="USERNAME" />
+            </Principal>
+            <Dependent Role="CN_NGHIEP_VU_NHAN_VIEN">
+              <PropertyRef Name="USERNAME" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CN_NHOM_N__ID_NH__1CBC4616">
+          <End Type="HOPLONG_DATABASEModel.CN_NHOM_NGHIEP_VU" Role="CN_NHOM_NGHIEP_VU" Multiplicity="1" />
+          <End Type="HOPLONG_DATABASEModel.CN_NHOM_NGUOI_DUNG_NGHIEP_VU" Role="CN_NHOM_NGUOI_DUNG_NGHIEP_VU" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CN_NHOM_NGHIEP_VU">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CN_NHOM_NGUOI_DUNG_NGHIEP_VU">
+              <PropertyRef Name="ID_NHOM_NGHIEP_VU" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1197,18 +1196,6 @@
                 <ScalarProperty Name="MA_MO_HINH" ColumnName="MA_MO_HINH" />
                 <ScalarProperty Name="TEN_MO_HINH" ColumnName="TEN_MO_HINH" />
                 <ScalarProperty Name="GHI_CHU" ColumnName="GHI_CHU" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CCTC_NHAN_VIEN">
-            <EntityTypeMapping TypeName="HOPLONG_DATABASEModel.CCTC_NHAN_VIEN">
-              <MappingFragment StoreEntitySet="CCTC_NHAN_VIEN">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="GIOI_TINH" ColumnName="GIOI_TINH" />
-                <ScalarProperty Name="NGAY_SINH" ColumnName="NGAY_SINH" />
-                <ScalarProperty Name="QUE_QUAN" ColumnName="QUE_QUAN" />
-                <ScalarProperty Name="TRINH_DO_HOC_VAN" ColumnName="TRINH_DO_HOC_VAN" />
-                <ScalarProperty Name="MA_PHONG_BAN" ColumnName="MA_PHONG_BAN" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1272,22 +1259,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="HT_NGUOI_DUNG">
-            <EntityTypeMapping TypeName="HOPLONG_DATABASEModel.HT_NGUOI_DUNG">
-              <MappingFragment StoreEntitySet="HT_NGUOI_DUNG">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
-                <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
-                <ScalarProperty Name="HO_VA_TEN" ColumnName="HO_VA_TEN" />
-                <ScalarProperty Name="SDT" ColumnName="SDT" />
-                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
-                <ScalarProperty Name="AVATAR" ColumnName="AVATAR" />
-                <ScalarProperty Name="IS_ADMIN" ColumnName="IS_ADMIN" />
-                <ScalarProperty Name="ALLOWED" ColumnName="ALLOWED" />
-                <ScalarProperty Name="MA_CONG_TY" ColumnName="MA_CONG_TY" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="CN_NHOM_NGHIEP_VU">
             <EntityTypeMapping TypeName="HOPLONG_DATABASEModel.CN_NHOM_NGHIEP_VU">
               <MappingFragment StoreEntitySet="CN_NHOM_NGHIEP_VU">
@@ -1305,23 +1276,6 @@
               <ScalarProperty Name="ID" ColumnName="ID_CHI_TIET_NGHIEP_VU" />
             </EndProperty>
           </AssociationSetMapping>
-          <AssociationSetMapping Name="CN_NHOM_NGUOI_DUNG_NGHIEP_VU" TypeName="HOPLONG_DATABASEModel.CN_NHOM_NGUOI_DUNG_NGHIEP_VU" StoreEntitySet="CN_NHOM_NGUOI_DUNG_NGHIEP_VU">
-            <EndProperty Name="CN_NHOM_NGHIEP_VU">
-              <ScalarProperty Name="ID" ColumnName="ID_NHOM_NGHIEP_VU" />
-            </EndProperty>
-            <EndProperty Name="HT_NGUOI_DUNG">
-              <ScalarProperty Name="ID" ColumnName="ID_NGUOI_DUNG" />
-            </EndProperty>
-          </AssociationSetMapping>
-          <EntitySetMapping Name="CN_NGHIEP_VU_NHAN_VIEN">
-            <EntityTypeMapping TypeName="HOPLONG_DATABASEModel.CN_NGHIEP_VU_NHAN_VIEN">
-              <MappingFragment StoreEntitySet="CN_NGHIEP_VU_NHAN_VIEN">
-                <ScalarProperty Name="MO_TA" ColumnName="MO_TA" />
-                <ScalarProperty Name="ID_NGUOI_DUNG" ColumnName="ID_NGUOI_DUNG" />
-                <ScalarProperty Name="ID_CHI_TIET_NGHIEP_VU" ColumnName="ID_CHI_TIET_NGHIEP_VU" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="DM_HANG_HOA">
             <EntityTypeMapping TypeName="HOPLONG_DATABASEModel.DM_HANG_HOA">
               <MappingFragment StoreEntitySet="DM_HANG_HOA">
@@ -1379,6 +1333,50 @@
                 <ScalarProperty Name="DIA_CHI_KHO" ColumnName="DIA_CHI_KHO" />
                 <ScalarProperty Name="TEN_KHO" ColumnName="TEN_KHO" />
                 <ScalarProperty Name="MA_KHO" ColumnName="MA_KHO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CCTC_NHAN_VIEN">
+            <EntityTypeMapping TypeName="HOPLONG_DATABASEModel.CCTC_NHAN_VIEN">
+              <MappingFragment StoreEntitySet="CCTC_NHAN_VIEN">
+                <ScalarProperty Name="MA_PHONG_BAN" ColumnName="MA_PHONG_BAN" />
+                <ScalarProperty Name="TRINH_DO_HOC_VAN" ColumnName="TRINH_DO_HOC_VAN" />
+                <ScalarProperty Name="QUE_QUAN" ColumnName="QUE_QUAN" />
+                <ScalarProperty Name="NGAY_SINH" ColumnName="NGAY_SINH" />
+                <ScalarProperty Name="GIOI_TINH" ColumnName="GIOI_TINH" />
+                <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CN_NGHIEP_VU_NHAN_VIEN">
+            <EntityTypeMapping TypeName="HOPLONG_DATABASEModel.CN_NGHIEP_VU_NHAN_VIEN">
+              <MappingFragment StoreEntitySet="CN_NGHIEP_VU_NHAN_VIEN">
+                <ScalarProperty Name="MO_TA" ColumnName="MO_TA" />
+                <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
+                <ScalarProperty Name="ID_CHI_TIET_NGHIEP_VU" ColumnName="ID_CHI_TIET_NGHIEP_VU" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CN_NHOM_NGUOI_DUNG_NGHIEP_VU">
+            <EntityTypeMapping TypeName="HOPLONG_DATABASEModel.CN_NHOM_NGUOI_DUNG_NGHIEP_VU">
+              <MappingFragment StoreEntitySet="CN_NHOM_NGUOI_DUNG_NGHIEP_VU">
+                <ScalarProperty Name="ID_NHOM_NGHIEP_VU" ColumnName="ID_NHOM_NGHIEP_VU" />
+                <ScalarProperty Name="ID_NGUOI_DUNG" ColumnName="ID_NGUOI_DUNG" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HT_NGUOI_DUNG">
+            <EntityTypeMapping TypeName="HOPLONG_DATABASEModel.HT_NGUOI_DUNG">
+              <MappingFragment StoreEntitySet="HT_NGUOI_DUNG">
+                <ScalarProperty Name="MA_CONG_TY" ColumnName="MA_CONG_TY" />
+                <ScalarProperty Name="ALLOWED" ColumnName="ALLOWED" />
+                <ScalarProperty Name="IS_ADMIN" ColumnName="IS_ADMIN" />
+                <ScalarProperty Name="AVATAR" ColumnName="AVATAR" />
+                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+                <ScalarProperty Name="SDT" ColumnName="SDT" />
+                <ScalarProperty Name="HO_VA_TEN" ColumnName="HO_VA_TEN" />
+                <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
+                <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

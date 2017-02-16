@@ -16,11 +16,9 @@ namespace ERP.Web.Models.Database
     {
         public HT_NGUOI_DUNG()
         {
-            this.CN_NHOM_NGHIEP_VU = new HashSet<CN_NHOM_NGHIEP_VU>();
             this.CN_NGHIEP_VU_NHAN_VIEN = new HashSet<CN_NGHIEP_VU_NHAN_VIEN>();
         }
     
-        public int ID { get; set; }
         public string USERNAME { get; set; }
         public string PASSWORD { get; set; }
         public string HO_VA_TEN { get; set; }
@@ -31,9 +29,8 @@ namespace ERP.Web.Models.Database
         public bool ALLOWED { get; set; }
         public string MA_CONG_TY { get; set; }
     
-        public virtual CCTC_NHAN_VIEN CCTC_NHAN_VIEN { get; set; }
-        public virtual ICollection<CN_NHOM_NGHIEP_VU> CN_NHOM_NGHIEP_VU { get; set; }
-        public virtual ICollection<CN_NGHIEP_VU_NHAN_VIEN> CN_NGHIEP_VU_NHAN_VIEN { get; set; }
         public virtual CCTC_CONG_TY CCTC_CONG_TY { get; set; }
+        public virtual CCTC_NHAN_VIEN CCTC_NHAN_VIEN { get; set; }
+        public virtual ICollection<CN_NGHIEP_VU_NHAN_VIEN> CN_NGHIEP_VU_NHAN_VIEN { get; set; }
     }
 }

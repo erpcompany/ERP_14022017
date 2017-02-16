@@ -14,7 +14,7 @@ namespace ERP.Web.Models.Database
     
     public partial class CCTC_NHAN_VIEN
     {
-        public int ID { get; set; }
+        public string USERNAME { get; set; }
         public string GIOI_TINH { get; set; }
         public Nullable<System.DateTime> NGAY_SINH { get; set; }
         public string QUE_QUAN { get; set; }

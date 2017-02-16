@@ -25,7 +25,7 @@ namespace ERP.Web.Models.Database
         public string MA_CONG_TY { get; set; }
         public string GHI_CHU { get; set; }
     
-        public virtual ICollection<CCTC_NHAN_VIEN> CCTC_NHAN_VIEN { get; set; }
         public virtual CCTC_CONG_TY CCTC_CONG_TY { get; set; }
+        public virtual ICollection<CCTC_NHAN_VIEN> CCTC_NHAN_VIEN { get; set; }
     }
 }

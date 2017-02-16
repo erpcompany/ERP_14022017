@@ -21,7 +21,6 @@ namespace ERP.Web
         }
         protected void Session_Start()
         {
-            Session["ID"] = null;
             Session["USERNAME"] = null;
             Session["HO_VA_TEN"] = null;
             Session["IS_AMIN"] = null;

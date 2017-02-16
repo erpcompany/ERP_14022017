@@ -17,9 +17,9 @@ namespace ERP.Web.Models.Database
         public CCTC_CONG_TY()
         {
             this.DM_KHO = new HashSet<DM_KHO>();
-            this.HT_NGUOI_DUNG = new HashSet<HT_NGUOI_DUNG>();
             this.CCTC_CONG_TY1 = new HashSet<CCTC_CONG_TY>();
             this.CCTC_PHONG_BAN = new HashSet<CCTC_PHONG_BAN>();
+            this.HT_NGUOI_DUNG = new HashSet<HT_NGUOI_DUNG>();
         }
     
         public string MA_CONG_TY { get; set; }
@@ -37,10 +37,10 @@ namespace ERP.Web.Models.Database
         public string GHI_CHU { get; set; }
     
         public virtual ICollection<DM_KHO> DM_KHO { get; set; }
-        public virtual ICollection<HT_NGUOI_DUNG> HT_NGUOI_DUNG { get; set; }
         public virtual ICollection<CCTC_CONG_TY> CCTC_CONG_TY1 { get; set; }
         public virtual CCTC_CONG_TY CCTC_CONG_TY2 { get; set; }
         public virtual CCTC_MO_HINH_CONG_TY CCTC_MO_HINH_CONG_TY { get; set; }
         public virtual ICollection<CCTC_PHONG_BAN> CCTC_PHONG_BAN { get; set; }
+        public virtual ICollection<HT_NGUOI_DUNG> HT_NGUOI_DUNG { get; set; }
     }
 }

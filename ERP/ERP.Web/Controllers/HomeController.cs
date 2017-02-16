@@ -29,7 +29,7 @@ namespace ERP.Web.Controllers
             {
 
 
-                Session["ID"] = user.ID;
+                
                 Session["USERNAME"] = user.USERNAME;
                 Session["HO_VA_TEN"] = user.HO_VA_TEN;
                 Session["IS_AMIN"] = user.IS_ADMIN;
@@ -70,7 +70,7 @@ namespace ERP.Web.Controllers
 
         public ActionResult Logout()
         {
-            Session["ID"] = null;
+            
             Session["USERNAME"] = null;
             Session["HO_VA_TEN"] = null;
             Session["IS_AMIN"] = null;

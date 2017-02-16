@@ -24,7 +24,7 @@ namespace ERP.Web.Areas.TruongAnHaNoi.Api.HeThong
 
         // GET: api/Api_NguoidungTAHN/5
         [ResponseType(typeof(HT_NGUOI_DUNG))]
-        public IHttpActionResult GetHT_NGUOI_DUNG(int id)
+        public IHttpActionResult GetHT_NGUOI_DUNG(string id)
         {
             HT_NGUOI_DUNG hT_NGUOI_DUNG = db.HT_NGUOI_DUNG.Find(id);
             if (hT_NGUOI_DUNG == null)
@@ -37,14 +37,14 @@ namespace ERP.Web.Areas.TruongAnHaNoi.Api.HeThong
 
         // PUT: api/Api_NguoidungTAHN/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutHT_NGUOI_DUNG(int id, HT_NGUOI_DUNG hT_NGUOI_DUNG)
+        public IHttpActionResult PutHT_NGUOI_DUNG(string id, HT_NGUOI_DUNG hT_NGUOI_DUNG)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != hT_NGUOI_DUNG.ID)
+            if (id != hT_NGUOI_DUNG.USERNAME)
             {
                 return BadRequest();
             }
@@ -80,14 +80,29 @@ namespace ERP.Web.Areas.TruongAnHaNoi.Api.HeThong
             }
 
             db.HT_NGUOI_DUNG.Add(hT_NGUOI_DUNG);
-            db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = hT_NGUOI_DUNG.ID }, hT_NGUOI_DUNG);
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateException)
+            {
+                if (HT_NGUOI_DUNGExists(hT_NGUOI_DUNG.USERNAME))
+                {
+                    return Conflict();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return CreatedAtRoute("DefaultApi", new { id = hT_NGUOI_DUNG.USERNAME }, hT_NGUOI_DUNG);
         }
 
         // DELETE: api/Api_NguoidungTAHN/5
         [ResponseType(typeof(HT_NGUOI_DUNG))]
-        public IHttpActionResult DeleteHT_NGUOI_DUNG(int id)
+        public IHttpActionResult DeleteHT_NGUOI_DUNG(string id)
         {
             HT_NGUOI_DUNG hT_NGUOI_DUNG = db.HT_NGUOI_DUNG.Find(id);
             if (hT_NGUOI_DUNG == null)
@@ -110,9 +125,9 @@ namespace ERP.Web.Areas.TruongAnHaNoi.Api.HeThong
             base.Dispose(disposing);
         }
 
-        private bool HT_NGUOI_DUNGExists(int id)
+        private bool HT_NGUOI_DUNGExists(string id)
         {
-            return db.HT_NGUOI_DUNG.Count(e => e.ID == id) > 0;
+            return db.HT_NGUOI_DUNG.Count(e => e.USERNAME == id) > 0;
         }
     }
 }

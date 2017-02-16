@@ -12,19 +12,19 @@ using ERP.Web.Models.Database;
 
 namespace ERP.Web.Areas.TruongAnDaNang.Api.HeThong
 {
-    public class Api_NhanvienDNController : ApiController
+    public class Api_NhanvienTADANController : ApiController
     {
         private HOPLONG_DATABASEEntities db = new HOPLONG_DATABASEEntities();
 
-        // GET: api/Api_NhanvienDN
+        // GET: api/Api_NhanvienTADAN
         public IQueryable<CCTC_NHAN_VIEN> GetCCTC_NHAN_VIEN()
         {
             return db.CCTC_NHAN_VIEN;
         }
 
-        // GET: api/Api_NhanvienDN/5
+        // GET: api/Api_NhanvienTADAN/5
         [ResponseType(typeof(CCTC_NHAN_VIEN))]
-        public IHttpActionResult GetCCTC_NHAN_VIEN(int id)
+        public IHttpActionResult GetCCTC_NHAN_VIEN(string id)
         {
             CCTC_NHAN_VIEN cCTC_NHAN_VIEN = db.CCTC_NHAN_VIEN.Find(id);
             if (cCTC_NHAN_VIEN == null)
@@ -35,16 +35,16 @@ namespace ERP.Web.Areas.TruongAnDaNang.Api.HeThong
             return Ok(cCTC_NHAN_VIEN);
         }
 
-        // PUT: api/Api_NhanvienDN/5
+        // PUT: api/Api_NhanvienTADAN/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutCCTC_NHAN_VIEN(int id, CCTC_NHAN_VIEN cCTC_NHAN_VIEN)
+        public IHttpActionResult PutCCTC_NHAN_VIEN(string id, CCTC_NHAN_VIEN cCTC_NHAN_VIEN)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != cCTC_NHAN_VIEN.ID)
+            if (id != cCTC_NHAN_VIEN.USERNAME)
             {
                 return BadRequest();
             }
@@ -70,7 +70,7 @@ namespace ERP.Web.Areas.TruongAnDaNang.Api.HeThong
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Api_NhanvienDN
+        // POST: api/Api_NhanvienTADAN
         [ResponseType(typeof(CCTC_NHAN_VIEN))]
         public IHttpActionResult PostCCTC_NHAN_VIEN(CCTC_NHAN_VIEN cCTC_NHAN_VIEN)
         {
@@ -87,7 +87,7 @@ namespace ERP.Web.Areas.TruongAnDaNang.Api.HeThong
             }
             catch (DbUpdateException)
             {
-                if (CCTC_NHAN_VIENExists(cCTC_NHAN_VIEN.ID))
+                if (CCTC_NHAN_VIENExists(cCTC_NHAN_VIEN.USERNAME))
                 {
                     return Conflict();
                 }
@@ -97,12 +97,12 @@ namespace ERP.Web.Areas.TruongAnDaNang.Api.HeThong
                 }
             }
 
-            return CreatedAtRoute("DefaultApi", new { id = cCTC_NHAN_VIEN.ID }, cCTC_NHAN_VIEN);
+            return CreatedAtRoute("DefaultApi", new { id = cCTC_NHAN_VIEN.USERNAME }, cCTC_NHAN_VIEN);
         }
 
-        // DELETE: api/Api_NhanvienDN/5
+        // DELETE: api/Api_NhanvienTADAN/5
         [ResponseType(typeof(CCTC_NHAN_VIEN))]
-        public IHttpActionResult DeleteCCTC_NHAN_VIEN(int id)
+        public IHttpActionResult DeleteCCTC_NHAN_VIEN(string id)
         {
             CCTC_NHAN_VIEN cCTC_NHAN_VIEN = db.CCTC_NHAN_VIEN.Find(id);
             if (cCTC_NHAN_VIEN == null)
@@ -125,9 +125,9 @@ namespace ERP.Web.Areas.TruongAnDaNang.Api.HeThong
             base.Dispose(disposing);
         }
 
-        private bool CCTC_NHAN_VIENExists(int id)
+        private bool CCTC_NHAN_VIENExists(string id)
         {
-            return db.CCTC_NHAN_VIEN.Count(e => e.ID == id) > 0;
+            return db.CCTC_NHAN_VIEN.Count(e => e.USERNAME == id) > 0;
         }
     }
 }

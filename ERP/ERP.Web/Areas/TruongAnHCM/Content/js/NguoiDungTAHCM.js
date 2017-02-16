@@ -61,7 +61,7 @@ function userCtrl($scope, $http) {
         $http.post("/api/Api_NguoidungTAHCM", data_add).then(function (response) {
             $scope.get_user();
             var nhanvien_add = {
-                ID: $scope.danhsachuser.ID,
+                USERNAME: $scope.username,
                 GIOI_TINH: $scope.gioitinh,
                 NGAY_SINH: $scope.ngaysinh,
                 QUE_QUAN: $scope.quequan,
@@ -72,6 +72,8 @@ function userCtrl($scope, $http) {
                 $scope.get_user();
             });
         });
+
+        
 
        
     }

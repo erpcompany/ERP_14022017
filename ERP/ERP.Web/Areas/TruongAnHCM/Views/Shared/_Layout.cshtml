@@ -1,6 +1,6 @@
 ﻿@{
     ViewBag.Title = "layout";
-    if (Session["ID"] == null)
+    if (Session["USERNAME"] == null)
     {
         Response.Redirect("~/Home/Login");
     }
@@ -74,7 +74,7 @@
                                     <a href="#">Cơ cấu tổ chức</a>
                                     <ul class="dropdown-menu">
                                         <li><a href="#">Phòng ban</a></li>
-                                        <li><a href="/TruongAnHCM/HT_NGUOI_DUNGTAHCM/Index">Người dùng</a></li>
+                                        <li><a href="/TruongAnHCM/Nguoidung/Index">Người dùng</a></li>
                                     </ul>
                                 </li>
                                 <li class="dropdown-submenu">

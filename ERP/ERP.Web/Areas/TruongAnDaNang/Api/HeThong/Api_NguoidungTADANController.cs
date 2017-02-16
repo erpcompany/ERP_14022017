@@ -12,19 +12,19 @@ using ERP.Web.Models.Database;
 
 namespace ERP.Web.Areas.TruongAnDaNang.Api.HeThong
 {
-    public class Api_NguoidungDNController : ApiController
+    public class Api_NguoidungTADANController : ApiController
     {
         private HOPLONG_DATABASEEntities db = new HOPLONG_DATABASEEntities();
 
-        // GET: api/Api_NguoidungDN
+        // GET: api/Api_NguoidungTADAN
         public IQueryable<HT_NGUOI_DUNG> GetHT_NGUOI_DUNG()
         {
             return db.HT_NGUOI_DUNG;
         }
 
-        // GET: api/Api_NguoidungDN/5
+        // GET: api/Api_NguoidungTADAN/5
         [ResponseType(typeof(HT_NGUOI_DUNG))]
-        public IHttpActionResult GetHT_NGUOI_DUNG(int id)
+        public IHttpActionResult GetHT_NGUOI_DUNG(string id)
         {
             HT_NGUOI_DUNG hT_NGUOI_DUNG = db.HT_NGUOI_DUNG.Find(id);
             if (hT_NGUOI_DUNG == null)
@@ -35,16 +35,16 @@ namespace ERP.Web.Areas.TruongAnDaNang.Api.HeThong
             return Ok(hT_NGUOI_DUNG);
         }
 
-        // PUT: api/Api_NguoidungDN/5
+        // PUT: api/Api_NguoidungTADAN/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutHT_NGUOI_DUNG(int id, HT_NGUOI_DUNG hT_NGUOI_DUNG)
+        public IHttpActionResult PutHT_NGUOI_DUNG(string id, HT_NGUOI_DUNG hT_NGUOI_DUNG)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != hT_NGUOI_DUNG.ID)
+            if (id != hT_NGUOI_DUNG.USERNAME)
             {
                 return BadRequest();
             }
@@ -70,7 +70,7 @@ namespace ERP.Web.Areas.TruongAnDaNang.Api.HeThong
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Api_NguoidungDN
+        // POST: api/Api_NguoidungTADAN
         [ResponseType(typeof(HT_NGUOI_DUNG))]
         public IHttpActionResult PostHT_NGUOI_DUNG(HT_NGUOI_DUNG hT_NGUOI_DUNG)
         {
@@ -80,14 +80,29 @@ namespace ERP.Web.Areas.TruongAnDaNang.Api.HeThong
             }
 
             db.HT_NGUOI_DUNG.Add(hT_NGUOI_DUNG);
-            db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = hT_NGUOI_DUNG.ID }, hT_NGUOI_DUNG);
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateException)
+            {
+                if (HT_NGUOI_DUNGExists(hT_NGUOI_DUNG.USERNAME))
+                {
+                    return Conflict();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return CreatedAtRoute("DefaultApi", new { id = hT_NGUOI_DUNG.USERNAME }, hT_NGUOI_DUNG);
         }
 
-        // DELETE: api/Api_NguoidungDN/5
+        // DELETE: api/Api_NguoidungTADAN/5
         [ResponseType(typeof(HT_NGUOI_DUNG))]
-        public IHttpActionResult DeleteHT_NGUOI_DUNG(int id)
+        public IHttpActionResult DeleteHT_NGUOI_DUNG(string id)
         {
             HT_NGUOI_DUNG hT_NGUOI_DUNG = db.HT_NGUOI_DUNG.Find(id);
             if (hT_NGUOI_DUNG == null)
@@ -110,9 +125,9 @@ namespace ERP.Web.Areas.TruongAnDaNang.Api.HeThong
             base.Dispose(disposing);
         }
 
-        private bool HT_NGUOI_DUNGExists(int id)
+        private bool HT_NGUOI_DUNGExists(string id)
         {
-            return db.HT_NGUOI_DUNG.Count(e => e.ID == id) > 0;
+            return db.HT_NGUOI_DUNG.Count(e => e.USERNAME == id) > 0;
         }
     }
 }

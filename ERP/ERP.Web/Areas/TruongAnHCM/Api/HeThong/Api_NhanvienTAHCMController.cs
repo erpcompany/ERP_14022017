@@ -24,7 +24,7 @@ namespace ERP.Web.Areas.TruongAnHCM.Api.HeThong
 
         // GET: api/Api_NhanvienTAHCM/5
         [ResponseType(typeof(CCTC_NHAN_VIEN))]
-        public IHttpActionResult GetCCTC_NHAN_VIEN(int id)
+        public IHttpActionResult GetCCTC_NHAN_VIEN(string id)
         {
             CCTC_NHAN_VIEN cCTC_NHAN_VIEN = db.CCTC_NHAN_VIEN.Find(id);
             if (cCTC_NHAN_VIEN == null)
@@ -37,14 +37,14 @@ namespace ERP.Web.Areas.TruongAnHCM.Api.HeThong
 
         // PUT: api/Api_NhanvienTAHCM/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutCCTC_NHAN_VIEN(int id, CCTC_NHAN_VIEN cCTC_NHAN_VIEN)
+        public IHttpActionResult PutCCTC_NHAN_VIEN(string id, CCTC_NHAN_VIEN cCTC_NHAN_VIEN)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != cCTC_NHAN_VIEN.ID)
+            if (id != cCTC_NHAN_VIEN.USERNAME)
             {
                 return BadRequest();
             }
@@ -87,7 +87,7 @@ namespace ERP.Web.Areas.TruongAnHCM.Api.HeThong
             }
             catch (DbUpdateException)
             {
-                if (CCTC_NHAN_VIENExists(cCTC_NHAN_VIEN.ID))
+                if (CCTC_NHAN_VIENExists(cCTC_NHAN_VIEN.USERNAME))
                 {
                     return Conflict();
                 }
@@ -97,12 +97,12 @@ namespace ERP.Web.Areas.TruongAnHCM.Api.HeThong
                 }
             }
 
-            return CreatedAtRoute("DefaultApi", new { id = cCTC_NHAN_VIEN.ID }, cCTC_NHAN_VIEN);
+            return CreatedAtRoute("DefaultApi", new { id = cCTC_NHAN_VIEN.USERNAME }, cCTC_NHAN_VIEN);
         }
 
         // DELETE: api/Api_NhanvienTAHCM/5
         [ResponseType(typeof(CCTC_NHAN_VIEN))]
-        public IHttpActionResult DeleteCCTC_NHAN_VIEN(int id)
+        public IHttpActionResult DeleteCCTC_NHAN_VIEN(string id)
         {
             CCTC_NHAN_VIEN cCTC_NHAN_VIEN = db.CCTC_NHAN_VIEN.Find(id);
             if (cCTC_NHAN_VIEN == null)
@@ -125,9 +125,9 @@ namespace ERP.Web.Areas.TruongAnHCM.Api.HeThong
             base.Dispose(disposing);
         }
 
-        private bool CCTC_NHAN_VIENExists(int id)
+        private bool CCTC_NHAN_VIENExists(string id)
         {
-            return db.CCTC_NHAN_VIEN.Count(e => e.ID == id) > 0;
+            return db.CCTC_NHAN_VIEN.Count(e => e.USERNAME == id) > 0;
         }
     }
 }
