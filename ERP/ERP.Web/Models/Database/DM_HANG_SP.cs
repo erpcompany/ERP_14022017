@@ -18,6 +18,7 @@ namespace ERP.Web.Models.Database
         {
             this.DM_HANG_SP1 = new HashSet<DM_HANG_SP>();
             this.DM_HANG_HOA = new HashSet<DM_HANG_HOA>();
+            this.DM_TONKHO_HANG = new HashSet<DM_TONKHO_HANG>();
         }
     
         public string MA_NHOM_HANG { get; set; }
@@ -28,5 +29,6 @@ namespace ERP.Web.Models.Database
         public virtual ICollection<DM_HANG_SP> DM_HANG_SP1 { get; set; }
         public virtual DM_HANG_SP DM_HANG_SP2 { get; set; }
         public virtual ICollection<DM_HANG_HOA> DM_HANG_HOA { get; set; }
+        public virtual ICollection<DM_TONKHO_HANG> DM_TONKHO_HANG { get; set; }
     }
 }
