@@ -14,11 +14,13 @@ function nhanvienCtrl($scope, $http) {
 
     //-------------------------------------------------------------
 
-    $scope.get_nhanvien = function (id) {
-        $http.get("/api/Api_NhanvienTAHCM/"+id).then(function (response) {
+    $scope.get_nhanvien = function (username) {
+        $http.get("/api/Api_NhanvienTAHCM/" + username).then(function (response) {
             $scope.nhanvien = response.data;
         });
     }
+
+    
 }
 
 //function hang hoa
@@ -34,14 +36,7 @@ function userCtrl($scope, $http) {
     }
     $scope.get_user();
     //-------------------------------------------------------------
-    $scope.get_user = function (username) {
-        $http.get("/api/Api_NguoidungTAHCM")
-                .then(function (response) {
-                    $scope.danhsachuser = response.data;
-
-                });
-
-    }
+    
 
 
     //Insert data
@@ -83,6 +78,9 @@ function userCtrl($scope, $http) {
         $scope.item = item;
     }
 
+    $scope.update_nv = function (nhanvien) {
+        $scope.nhanvien = nhanvien;
+    }
     $scope.save = function (user) {
         var data_update = {
             ID : user,
@@ -97,7 +95,17 @@ function userCtrl($scope, $http) {
         }
         $http.put("/api/Api_NguoidungTAHCM/" + user, data_update).then(function (response) {
             $scope.get_user();
-
+            var nhanvien_update = {
+                USERNAME: $scope.item.USERNAME,
+                GIOI_TINH: $scope.nhanvien.GIOI_TINH,
+                NGAY_SINH: $scope.nhanvien.NGAY_SINH,
+                QUE_QUAN: $scope.nhanvien.QUE_QUAN,
+                TRINH_DO_HOC_VAN: $scope.nhanvien.TRINH_DO_HOC_VAN,
+                MA_PHONG_BAN: $scope.nhanvien.MA_PHONG_BAN
+            }
+            $http.put("/api/Api_NhanvienTAHCM/" + $scope.item.USERNAME, nhanvien_update).then(function (response) {
+                $scope.get_user();
+            });
         });
     }
     //-------------------------------------------------------------

@@ -1184,6 +1184,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="GetListNhanVienPhongBan_Result">
+          <Property Type="String" Name="HO_VA_TEN" Nullable="false" MaxLength="64" />
+          <Property Type="String" Name="EMAIL" Nullable="true" MaxLength="256" />
+          <Property Type="String" Name="SDT" Nullable="true" MaxLength="64" />
+          <Property Type="String" Name="GIOI_TINH" Nullable="true" MaxLength="5" />
+          <Property Type="DateTime" Name="NGAY_SINH" Nullable="true" />
+          <Property Type="String" Name="QUE_QUAN" Nullable="true" MaxLength="64" />
+          <Property Type="String" Name="TRINH_DO_HOC_VAN" Nullable="true" MaxLength="64" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
