@@ -12,6 +12,7 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.6 -->
+    <link href="~/Content/download/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
     <link href='http://fonts.googleapis.com/css?family=Roboto:100,400,300,500,700' rel='stylesheet' type='text/css'>
     <link href="~/Content/download/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
@@ -28,42 +29,82 @@
 
         <div align="center" class="fond">
             <div style="width:1000px;">
-                
+                <!--Button hàng hóa-->
                 <div class="style_prevu_kit" style="background-color:#5BC0DE;">
                     <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" style="border: none; border-radius:16px"><i class="fa fa-gift fa-3x"></i></button>
                 </div>
+                <!------------------------------------------------------------>
 
+                <!--Button tồn kho hãng-->
+                <div class="style_prevu_kit" style="background-color:#5BC0DE;">
+                    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#modaltonkhohang" style="border: none; border-radius:16px"><i class="fa fa-da fa-3x"></i></button>
+                </div>
+                <!------------------------------------------------------------>
             </div>
         </div>
+        
         </div>
 
-    <!-- Modal -->
+    <!-- Modal HANG HOA-->
     <div class="modal fade" id="myModal" role="dialog">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Hàng Hóa</h4>
-                </div>
                 <div class="modal-body">
 
                     <br />
                     @using (Html.BeginForm("Import_Hanghoa", "ImportExcel", FormMethod.Post, new { enctype = "multipart/form-data" }))
                     {
-                        <input type="file" name="file" />
-                        <br />
-                        <input type="submit" value="Lưu dữ liệu" />
-                        <p style="color:blue">@ViewBag.Message</p>
-                        <p style="color:blue">@ViewBag.Information</p>
-                        <p style="color:red">@ViewBag.Error</p>
+                       
+                            <!-- Form Name -->
+                            <h1>Hàng Hóa</h1> 
+                            <hr />
+                            <input type="file" name="file" class="file" value="Chọn file từ hệ thống">
+                            <br />
+                            <input type="submit" class="btn btn-success" value="Thêm vào hệ thống" />
+                            <p style="color:blue">@ViewBag.Message</p>
+                            <p style="color:blue">@ViewBag.Information</p>
+                            <p style="color:red">@ViewBag.Error</p>
+
                     }
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Thoát</button>
                 </div>
             </div>
         </div>
     </div>
+    <!--END MODAL-->
+
+    <!-- Modal Tồn kho hãng-->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-body">
+
+                    <br />
+                    @using (Html.BeginForm("Import_Hanghoa", "ImportExcel", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+
+                            <!-- Form Name -->
+                        <h1>Hàng Hóa</h1>
+                            <hr />
+                            <input type="file" name="file" class="file" value="Chọn file từ hệ thống">
+                            <br />
+                            <input type="submit" class="btn btn-success" value="Thêm vào hệ thống" />
+                            <p style="color:blue">@ViewBag.Message</p>
+                            <p style="color:blue">@ViewBag.Information</p>
+                            <p style="color:red">@ViewBag.Error</p>
+
+                    }
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Thoát</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--END MODAL-->
+
     <!-- jQuery 2.2.3 -->
     <script src="~/Content/download/plugins/jQuery/jquery-2.2.3.min.js"></script>
     <!-- jQuery UI 1.11.4 -->

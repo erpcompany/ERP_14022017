@@ -17,6 +17,7 @@ namespace ERP.Web.Models.Database
         public DM_HANG_HOA()
         {
             this.DM_HANG_TON_KHO = new HashSet<DM_HANG_TON_KHO>();
+            this.DM_TONKHO_HANG = new HashSet<DM_TONKHO_HANG>();
         }
     
         public string MA_HANG_HT { get; set; }
@@ -32,11 +33,13 @@ namespace ERP.Web.Models.Database
         public Nullable<int> TK_HACH_TOAN_KHO { get; set; }
         public Nullable<int> TK_DOANH_THU { get; set; }
         public Nullable<int> TK_CHI_PHI { get; set; }
+        public string XUAT_XU { get; set; }
     
         public virtual DM_HANG_SP DM_HANG_SP { get; set; }
         public virtual ICollection<DM_HANG_TON_KHO> DM_HANG_TON_KHO { get; set; }
         public virtual DM_TAI_KHOAN_HACH_TOAN DM_TAI_KHOAN_HACH_TOAN { get; set; }
         public virtual DM_TAI_KHOAN_HACH_TOAN DM_TAI_KHOAN_HACH_TOAN1 { get; set; }
         public virtual DM_TAI_KHOAN_HACH_TOAN DM_TAI_KHOAN_HACH_TOAN2 { get; set; }
+        public virtual ICollection<DM_TONKHO_HANG> DM_TONKHO_HANG { get; set; }
     }
 }
