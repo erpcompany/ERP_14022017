@@ -31,9 +31,9 @@ namespace ERP.Web.Models.Database
         public bool ALLOWED { get; set; }
         public string MA_CONG_TY { get; set; }
     
-        public virtual CCTC_CONG_TY CCTC_CONG_TY { get; set; }
         public virtual CCTC_NHAN_VIEN CCTC_NHAN_VIEN { get; set; }
         public virtual ICollection<CN_NHOM_NGHIEP_VU> CN_NHOM_NGHIEP_VU { get; set; }
         public virtual ICollection<CN_NGHIEP_VU_NHAN_VIEN> CN_NGHIEP_VU_NHAN_VIEN { get; set; }
+        public virtual CCTC_CONG_TY CCTC_CONG_TY { get; set; }
     }
 }
