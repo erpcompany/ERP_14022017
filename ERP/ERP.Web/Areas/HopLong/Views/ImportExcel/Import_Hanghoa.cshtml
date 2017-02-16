@@ -29,21 +29,58 @@
 
         <div align="center" class="fond">
             <div style="width:1000px;">
-                <!--Button hàng hóa-->
-                <div class="style_prevu_kit" style="background-color:#5BC0DE;">
-                    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" style="border: none; border-radius:16px"><i class="fa fa-gift fa-3x"></i></button>
-                </div>
-                <!------------------------------------------------------------>
-
-                <!--Button tồn kho hãng-->
-                <div class="style_prevu_kit" style="background-color:#5BC0DE;">
-                    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#modaltonkhohang" style="border: none; border-radius:16px"><i class="fa fa-da fa-3x"></i></button>
-                </div>
-                <!------------------------------------------------------------>
+                <table>
+                    <tr>
+                        <td style="padding-left: 20px !important;">
+                            <center>
+                                <!--Button hàng hóa-->
+                                <div class="style_prevu_kit" style="background-color:#5BC0DE;">
+                                    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" style="border: none; border-radius:16px"><i class="fa fa-gift fa-3x"></i></button>
+                                </div>
+                                <!------------------------------------------------------------>
+                            </center>
+                        </td>
+                        <td style="padding-left: 20px !important;">
+                            <center>
+                                <!--Button tồn kho hãng-->
+                                <div class="style_prevu_kit" style="background-color:#5BC0DE;">
+                                    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#modaltonkhohang" style="border: none; border-radius:16px"><i class="fa fa-database fa-3x"></i></button>
+                                </div>
+                                <!------------------------------------------------------------>
+                            </center>
+                        </td>
+                        <td style="padding-left: 20px !important;">
+                            <center>
+                            <!--Button tồn kho hãng-->
+                                <div class="style_prevu_kit" style="background-color:#5BC0DE;">
+                                    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#modalphongban" style="border: none; border-radius:16px"><i class="fa fa-home fa-3x"></i></button>
+                                </div>
+                            <!------------------------------------------------------------>
+                            </center>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding-left: 20px !important;"> <br/><center>Hàng hóa</center></td>
+                        <td style="padding-left: 20px !important;"><br /><center>Tồn Kho hãng</center></td>
+                        <td style="padding-left: 20px !important;"><br /><center>Phòng ban</center> </td>
+                    </tr>
+                </table>
+                
+                
+                
+                
+                
             </div>
         </div>
         
         </div>
+    <!------------------------------------------------------------>
+
+
+
+
+
+
 
     <!-- Modal HANG HOA-->
     <div class="modal fade" id="myModal" role="dialog">
@@ -74,21 +111,53 @@
         </div>
     </div>
     <!--END MODAL-->
-
+    <br />
     <!-- Modal Tồn kho hãng-->
-    <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal fade" id="modaltonkhohang" role="dialog">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-body">
 
                     <br />
-                    @using (Html.BeginForm("Import_Hanghoa", "ImportExcel", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    @using (Html.BeginForm("Import_TonKhoHang", "ImportExcel", FormMethod.Post, new { enctype = "multipart/form-data" }))
                     {
 
                             <!-- Form Name -->
                         <h1>Hàng Hóa</h1>
                             <hr />
                             <input type="file" name="file" class="file" value="Chọn file từ hệ thống">
+                            <br />
+                            <input type="submit" class="btn btn-success" value="Thêm vào hệ thống" />
+                            <p style="color:blue">@ViewBag.Message</p>
+                            <p style="color:blue">@ViewBag.Information</p>
+                            <p style="color:red">@ViewBag.Error</p>
+
+                    }
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Thoát</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--END MODAL-->
+    <br />
+    <!-- Modal Tồn kho hãng-->
+    <div class="modal fade" id="modalphongban" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-body">
+
+                    <br />
+                    
+
+                    @using (Html.BeginForm("Import_PhongBan", "ImportExcel", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+
+                            <!-- Form Name -->
+                        <h1>Phòng Ban</h1>
+                        <hr />
+                            <input type="file" name="UploadedFile" class="file" value="Chọn file từ hệ thống">
                             <br />
                             <input type="submit" class="btn btn-success" value="Thêm vào hệ thống" />
                             <p style="color:blue">@ViewBag.Message</p>
