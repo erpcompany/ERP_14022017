@@ -10,7 +10,7 @@ app.controller('khoCtrl', khoCtrl);
 
 //function hang hoa
 function khoCtrl($scope, $http) {
-    
+
     $scope.get_kho = function () {
         $http.get("/api/Api_KhoTAHCM")
                 .then(function (response) {
@@ -62,7 +62,7 @@ function khoCtrl($scope, $http) {
             TRUC_THUOC: $scope.item.TRUC_THUOC,
             GHI_CHU: $scope.item.GHI_CHU,
         }
-        $http.put("/api/Api_KhoTAHCM" + makho, data_update).then(function (response) {
+        $http.put("/api/Api_KhoTAHCM/" + makho, data_update).then(function (response) {
             $scope.get_kho();
         });
     }
@@ -75,7 +75,7 @@ function khoCtrl($scope, $http) {
         }
 
 
-        $http.delete("/api/Api_KhoTAHCM" + makho, data_delete)
+        $http.delete("/api/Api_KhoTAHCM/" + makho, data_delete)
             .then(function (response) {
                 $scope.get_hanghoa();
             });
