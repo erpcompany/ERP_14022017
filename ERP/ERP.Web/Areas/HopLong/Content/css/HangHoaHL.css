@@ -153,3 +153,19 @@ legend{
     margin-top: 10px;
     text-align: center;
 }
+.table>tbody>tr>td {
+    padding: 0px !important;
+}
+.glyphicon-edit{
+    color: blue;
+}
+.glyphicon-remove{
+    color: red;
+}
+.btn-success,.btn-warning {
+    background: transparent !important;  
+    
+}
+.tbody{
+    border: none !important;
+}
