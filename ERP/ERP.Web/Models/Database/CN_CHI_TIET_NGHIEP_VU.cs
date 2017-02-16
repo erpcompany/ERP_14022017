@@ -16,8 +16,8 @@ namespace ERP.Web.Models.Database
     {
         public CN_CHI_TIET_NGHIEP_VU()
         {
-            this.CN_NHOM_NGHIEP_VU = new HashSet<CN_NHOM_NGHIEP_VU>();
             this.CN_NGHIEP_VU_NHAN_VIEN = new HashSet<CN_NGHIEP_VU_NHAN_VIEN>();
+            this.CN_NHOM_NGHIEP_VU = new HashSet<CN_NHOM_NGHIEP_VU>();
         }
     
         public int ID { get; set; }
@@ -26,7 +26,7 @@ namespace ERP.Web.Models.Database
         public string MO_TA { get; set; }
     
         public virtual CN_NGHIEP_VU CN_NGHIEP_VU { get; set; }
-        public virtual ICollection<CN_NHOM_NGHIEP_VU> CN_NHOM_NGHIEP_VU { get; set; }
         public virtual ICollection<CN_NGHIEP_VU_NHAN_VIEN> CN_NGHIEP_VU_NHAN_VIEN { get; set; }
+        public virtual ICollection<CN_NHOM_NGHIEP_VU> CN_NHOM_NGHIEP_VU { get; set; }
     }
 }

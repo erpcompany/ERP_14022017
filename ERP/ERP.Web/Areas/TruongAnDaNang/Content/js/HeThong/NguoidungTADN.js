@@ -1,35 +1,38 @@
-﻿
+﻿/// <reference path="../../Views/HangHoaHL/Create.cshtml" />
+/// <reference path="../../Views/HangHoaHL/Create.cshtml" />
+/// <reference path="../../Views/HangHoaHL/Create.cshtml" />
+/// <reference path="../../Views/HangHoaHL/Create.cshtml" />
 
 
-var app = angular.module('nguoidungApp', ['angularUtils.directives.dirPagination']);
-app.controller('nguoidungCtrl', nguoidungCtrl);
-//function người dùng
+var app = angular.module('userApp', ['angularUtils.directives.dirPagination']);
+app.controller('userCtrl', userCtrl);
 
-//function người dùng
-function nguoidungCtrl($scope, $http)
-{
-    // lấy dữ liệu từ server(nhóm hàng)
-    $scope.get_nguoidung = function () {
-        $http.get("/api/Api_NguoidungDN/")
-                .then(function (response) {
-                    $scope.nguoidung = response.data;
-                });
+//function nhân viên
+app.controller('nhanvienCtrl', nhanvienCtrl);
+function nhanvienCtrl($scope, $http) {
 
-    }
-    $scope.get_nguoidung();
+
     //-------------------------------------------------------------
 
-    // lấy dữ liệu từ server(nhân viên)
-    $scope.get_nhanvien = function () {
-        $http.get("/api/Api_NhanvienDN/")
+    $scope.get_nhanvien = function (id) {
+        $http.get("/api/Api_NhanvienTADAN/" + id).then(function (response) {
+            $scope.nhanvien = response.data;
+        });
+    }
+}
+
+//function người dùng
+function userCtrl($scope, $http) {
+
+    $scope.get_user = function () {
+        $http.get("/api/Api_NguoidungTADAN")
                 .then(function (response) {
-                    $scope.nhanvien = response.data;
+                    $scope.danhsachuser = response.data;
+
                 });
 
     }
-
-    // init dữ liệu
-    $scope.get_nhanvien();
+    $scope.get_user();
     //-------------------------------------------------------------
 
 
@@ -37,22 +40,35 @@ function nguoidungCtrl($scope, $http)
     //Insert data
 
     $scope.add = function () {
+
         var data_add = {
-            ID: $scope.id,
             USERNAME: $scope.username,
             PASSWORD: $scope.password,
             HO_VA_TEN: $scope.hovaten,
             SDT: $scope.sdt,
             EMAIL: $scope.email,
-            AVATAR: $scope.avatar,
-            IS_ADMIN: $scope.isadmin,
+            IS_ADMIN: $scope.admin,
             ALLOWED: $scope.allowed,
-            MA_CONG_TY: $scope.macongty
+            MA_CONG_TY: "TADAN"
         }
-        $http.post("/api/Api_NguoidungDN/", data_add).then(function (response) {
-            $scope.get_nguoidung();
-
+        $http.post("/api/Api_NguoidungTADAN/", data_add).then(function (response) {
+            $scope.get_user();
+            var nhanvien_add = {
+                USERNAME: $scope.username,
+                GIOI_TINH: $scope.gioitinh,
+                NGAY_SINH: $scope.ngaysinh,
+                QUE_QUAN: $scope.quequan,
+                TRINH_DO_HOC_VAN: $scope.trinhdohocvan,
+                MA_PHONG_BAN: $scope.maphongban
+            }
+            $http.post("/api/Api_NhanvienTADAN", nhanvien_add).then(function (response) {
+                $scope.get_user();
+            });
         });
+
+
+
+
     }
     //-------------------------------------------------------------
     // Update data
@@ -60,39 +76,36 @@ function nguoidungCtrl($scope, $http)
         $scope.item = item;
     }
 
-    $scope.save = function (id) {
+    $scope.save = function (user) {
         var data_update = {
-            ID: $scope.item.ID,
+            ID: user,
             USERNAME: $scope.item.USERNAME,
             PASSWORD: $scope.item.PASSWORD,
             HO_VA_TEN: $scope.item.HO_VA_TEN,
             SDT: $scope.item.SDT,
             EMAIL: $scope.item.EMAIL,
-            AVATAR: $scope.item.AVATAR,
             IS_ADMIN: $scope.item.IS_ADMIN,
             ALLOWED: $scope.item.ALLOWED,
-            MA_CONG_TY: $scope.item.MA_CONG_TY
-
+            MA_CONG_TY: "TAHCM",
         }
-        $http.put("/api/Api_NguoidungDN/" + id, data_update).then(function (response) {
-            $scope.get_nguoidung();
-            
+        $http.put("api/Api_NguoidungTADAN/" + user, data_update).then(function (response) {
+            $scope.get_user();
+
         });
     }
     //-------------------------------------------------------------
     // Xóa 
-    $scope.delete = function (id) {
+    $scope.delete = function (user) {
 
         var data_delete = {
-            ID: id
+            ID: user,
         }
 
 
-        $http.delete("/api/Api_NguoidungDN/" + id, data_delete)
+        $http.delete("api/Api_NguoidungTADAN/" + user, data_delete)
             .then(function (response) {
-                $scope.get_nguoidung();
+                $scope.get_user();
             });
     }
 
 }
-

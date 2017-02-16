@@ -330,7 +330,7 @@
 
                     <td colspan="9">
 
-                        <div class="content expandrow" >
+                        <div class="content expandrow">
 
                             <ul class="nav nav-tabs">
                                 <li class="active"><a data-toggle="tab" href="#chitiet">Chi tiết hàng hóa</a></li>
@@ -449,14 +449,23 @@
 
                     </td>
                 </tr>
-    </tbody>
-    </table>
-    <dir-pagination-controls max-size="1" style="float:right;"
-                             direction-links="true"
-                             boundary-links="true">
-    </dir-pagination-controls>
-</div>
+
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="9" style="border: none !important">
+                        <dir-pagination-controls max-size="1" style="float:right;"
+                                                 direction-links="true"
+                                                 boundary-links="true">
+                        </dir-pagination-controls>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
 
     </div>
 
+</div>
+
+>>>>>>> refs/remotes/origin/master
 <script src="~/Content/download/angularjs/angular-ui-router.js"></script>
