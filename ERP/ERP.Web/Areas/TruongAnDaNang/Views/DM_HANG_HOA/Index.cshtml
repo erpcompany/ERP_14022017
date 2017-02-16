@@ -3,17 +3,16 @@
 @{
     ViewBag.Title = "Index";
 }
-<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
 <link href="https://cdn.datatables.net/1.10.13/css/dataTables.bootstrap.min.css" rel="stylesheet" />
-<link href="~/Content/download/dist/css/AdminLTE.min.css" rel="stylesheet" />
-<link href="~/Areas/HopLong/Content/css/HangHoaHL.css" rel="stylesheet" />
-<link href="~/Content/download/dist/css/AdminLTE.css" rel="stylesheet" />
+
+<link href="~/Areas/TruongAnDaNang/Content/css/Kho/HangHoaTADN.css" rel="stylesheet" />
 <script src="~/Content/download/angularjs/angular.min.js"></script>
 <script src="~/Content/download/angularjs/dirPagination.js"></script>
-<script src="~/Areas/HopLong/Content/js/HangHoaHL.js"></script>
-
+<script src="~/Areas/TruongAnDaNang/Content/js/Kho/HangHoaTADN.js"></script>
 <div ng-app="hanghoaApp" ng-controller="hangHoaCtrl">
     <div class="content">
+
         <div id="quick-access">
             <form class="form-inline quick-search-form" role="form" action="#">
                 <div class="form-group">
@@ -273,7 +272,7 @@
                             <fieldset>
                                 <!-- Form Name -->
                                 <legend>Xóa kho</legend>
-                                <center>Bạn có thực sự muốn xóa hàng <b>{{item.MA_HANG_HT}}</b></center>
+                                <center>Bạn có thực sự muốn xóa Mã hàng là: <b>{{item.MA_HANG_HT}}</b></center>
                                 <p></p>
 
                                 <div class="form-group">
@@ -307,9 +306,7 @@
                 </tr>
             </thead>
             <tbody>
-
-                <tr dir-paginate-start="item in danhsachhanghoa | itemsPerPage:15 | filter: search_text" class="hover" ng-class-odd="'odd'" ng-class-even="'even'">
-
+                <tr dir-paginate-start="item in danhsachhanghoa | itemsPerPage:3 | filter: search_text" class="hover" ng-class-odd="'odd'" ng-class-even="'even'">
                     <td>
                         <button class="expand" ng-if="item.expanded" ng-click="item.expanded = false"><i class="fa minus fa-minus-circle" aria-hidden="true"></i></button>
                         <button class="expand" type="button" ng-if="!item.expanded" ng-click="item.expanded = true" ng-><i class="fa plus fa-plus-circle" aria-hidden="true"></i></button>
@@ -333,12 +330,11 @@
                 <tr ng-if="item.expanded" dir-paginate-end="">
 
                     <td colspan="9">
-
-                        <div class="content expandrow" >
+                        <div class="content">
 
                             <ul class="nav nav-tabs">
                                 <li class="active"><a data-toggle="tab" href="#chitiet">Chi tiết hàng hóa</a></li>
-                                <li><a data-toggle="tab" href="#tonkho" ng-click="get_nhomhangchitiet(item.MA_NHOM_HANG)">Tồn kho</a></li>
+                                <li><a data-toggle="tab" href="#tonkho">Tồn kho</a></li>
                             </ul>
 
                             <div class="tab-content">
@@ -445,22 +441,20 @@
                                 </div>
                                 <div id="tonkho" class="tab-pane fade">
                                     <h3>Menu 2</h3>
-                                    {{danhsach.TEN_NHOM_HANG}}
                                     <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
                                 </div>
                             </div>
                         </div>
 
+                        {{item.MA_HANG_NHAP}}
                     </td>
                 </tr>
-    </tbody>
-    </table>
-    <dir-pagination-controls max-size="1" style="float:right;position: fixed"
-                             direction-links="true"
-                             boundary-links="true">
-    </dir-pagination-controls>
-</div>
-
+            </tbody>
+        </table>
+        <dir-pagination-controls max-size="1" style="float:right;"
+                                 direction-links="true"
+                                 boundary-links="true">
+        </dir-pagination-controls>
     </div>
 </div>
 <script src="~/Content/download/angularjs/angular-ui-router.js"></script>
