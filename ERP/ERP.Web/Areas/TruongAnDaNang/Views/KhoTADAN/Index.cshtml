@@ -1,4 +1,9 @@
-﻿@model IEnumerable<ERP.Web.Models.Database.DM_KHO>
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+@model IEnumerable<ERP.Web.Models.Database.DM_KHO>
 
 @{
     ViewBag.Title = "Index";
@@ -64,14 +69,6 @@
                                         </select>
                                     </div>
                                 </div>
-                                <!-- Text input-->
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label" for="name">Trực thuộc: </label>
-                                    <div class="col-md-4">
-                                        <input id="tructhuoc" name="tructhuoc" type="text" placeholder="@Session["MA_CONG_TY"]" class="form-control input-md" ng-model="truc_thuoc" value="@Session["MA_CONG_TY"]">
-                                    </div>
-                                </div>
-
                                 <!-- Textarea -->
                                 <div class="form-group">
                                     <label class="col-md-4 control-label" for="ghichu">Ghi chú</label>

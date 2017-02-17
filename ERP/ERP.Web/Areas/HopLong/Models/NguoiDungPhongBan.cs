@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace ERP.Web.Areas.TruongAnHCM.Models
+namespace ERP.Web.Areas.HopLong.Models
 {
     public class NguoiDungPhongBan
     {
