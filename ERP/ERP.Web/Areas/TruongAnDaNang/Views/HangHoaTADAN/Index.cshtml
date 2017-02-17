@@ -1,8 +1,8 @@
-﻿@model IEnumerable<ERP.Web.Models.Database.DM_HANG_HOA>
-
+﻿
 @{
     ViewBag.Title = "Index";
 }
+
 
 <link href="https://cdn.datatables.net/1.10.13/css/dataTables.bootstrap.min.css" rel="stylesheet" />
 
@@ -291,7 +291,7 @@
         <br />
         <!--end modal-->
 
-        <table id="example" class="table table-striped table-bordered" cellspacing="0" name="tblhanghoa">
+        <table id="example" class="table table-striped table-bordered" cellspacing="0" name="tblhanghoa" ng-controller="tonkhoCtrl">
             <thead>
                 <tr>
                     <th></th>
@@ -306,7 +306,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr dir-paginate-start="item in danhsachhanghoa | itemsPerPage:3 | filter: search_text" class="hover" ng-class-odd="'odd'" ng-class-even="'even'">
+                <tr dir-paginate-start="item in filtered=(danhsachhanghoa| filter:{MA_HANG_HT: search_text}) | itemsPerPage:3 " class="hover" ng-class-odd="'odd'" ng-class-even="'even'">
                     <td>
                         <button class="expand" ng-if="item.expanded" ng-click="item.expanded = false"><i class="fa minus fa-minus-circle" aria-hidden="true"></i></button>
                         <button class="expand" type="button" ng-if="!item.expanded" ng-click="item.expanded = true" ng-><i class="fa plus fa-plus-circle" aria-hidden="true"></i></button>
@@ -334,7 +334,7 @@
 
                             <ul class="nav nav-tabs">
                                 <li class="active"><a data-toggle="tab" href="#chitiet">Chi tiết hàng hóa</a></li>
-                                <li><a data-toggle="tab" href="#tonkho">Tồn kho</a></li>
+                                <li><a data-toggle="tab" href="#tonkho" ng-click="gettonkho(item.MA_HANG_HT)">Tồn kho</a></li>
                             </ul>
 
                             <div class="tab-content">
@@ -440,13 +440,23 @@
                                     </fieldset>
                                 </div>
                                 <div id="tonkho" class="tab-pane fade">
-                                    <h3>Menu 2</h3>
-                                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+                                    <table table class="table table-striped table-bordered table-list">
+                                        <thead>
+                                            <tr>
+                                                <th> Mã kho</th>
+                                                <th> Số lượng tồn</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="item in tonkho">
+                                                <td>{{item.MA_KHO}}</td>
+                                                <td>{{item.SL_TON}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
-
-                        {{item.MA_HANG_NHAP}}
                     </td>
                 </tr>
             </tbody>
